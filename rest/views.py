@@ -8,6 +8,7 @@ from rest.forms import UserForm
 from django import shortcuts
 from django.contrib.auth import authenticate, login
 from datetime import datetime, timedelta
+import re
 
 
 class RestApi:
@@ -112,19 +113,24 @@ def register(request):
     if request.method == 'POST':
         user_data = UserForm(request.POST, prefix='user')
         if user_data.is_valid():
-            user_data.save()
-            user = User.objects.get(username=user_data['username'].value())
-            d = timedelta(days=2)
-            expire_date = datetime.now() + d
-            my_token = default_token_generator.make_token(user)
-            # print(my_token)
-            token = ApiToken(token_content=my_token, token_expired=expire_date,
-                             token_clientId=user)
-            token.save()
-            print(token)
-            return HttpResponse(token.token_content)
+            if re.match(r'[A-Za-z0-9]{6,}', user_data.cleaned_data['password']):
+                user_data.save()
+                user = User.objects.get(username=user_data['username'].value())
+                d = timedelta(days=2)
+                expire_date = datetime.now() + d
+                my_token = default_token_generator.make_token(user)
+                # print(my_token)
+                token = ApiToken(token_content=my_token, token_expired=expire_date,
+                                 token_clientId=user)
+                token.save()
+                print(token)
+                return HttpResponse(token.token_content)
+            else:
+                user_data.add_error('password', 'your password must required combination of A-Z, a-z, 0-9 and at '
+                                                'least 6 characters')
     else:
         user_data = UserForm(prefix='user')
+        print(user_data.as_ul())
     return shortcuts.render(request, "rest/register.html", {"form": user_data})
 
     # def login(request):
