@@ -27,5 +27,6 @@ class MyAdminSite(AdminSite):
 admin_site = MyAdminSite(name='admin')
 admin_site.register(models.BlogPost, BlogAdmin)
 admin_site.register(models.PostCategory, PostCategoryAdmin)
+admin_site.register(models.ApiToken)
 admin_site.register(User)
 

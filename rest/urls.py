@@ -4,5 +4,5 @@ from rest import views
 
 urlpatterns = [
     path('api', views.RestApi.api),
-    path('', views.register)
+    path('', views.UserActivity.register)
 ]

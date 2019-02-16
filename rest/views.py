@@ -9,6 +9,7 @@ from django import shortcuts
 from django.contrib.auth import authenticate, login
 from datetime import datetime, timedelta
 import re
+import json
 
 
 class RestApi:
@@ -61,7 +62,7 @@ class RestApi:
                                      'post_privacy': str(a.post_privacy),
                                      'post_category': a.post_category.category_name
                                      } for a in post_query]
-                            return JsonResponse({'d': data})
+                            return JsonResponse({'data': data})
                     else:
                         data = {'Error message:': 'You can\'t request more than 5 items'}
                         return JsonResponse(data)
@@ -76,9 +77,8 @@ class RestApi:
                     new_post = BlogPost.objects.create(post_title=title, post_content=content, post_author=post_author,
                                                        post_category=post_category)
                     new_post.save()
-                    ##TODO:: Pass data to user
-                    data = [{'result': 'OK'}]
-                    return JsonResponse(data, safe=False)
+                    data = {'result': 'OK'}
+                    return JsonResponse(data)
                 elif request.method == 'PUT':
                     post_id = request.GET.get('post_id')
                     post = BlogPost.objects.get(id=post_id)
@@ -93,14 +93,14 @@ class RestApi:
                         post_category = PostCategory.objects.get(category_name=request.GET.get('post_category'))
                         post.post_category = post_category
                     post.save()
-                    data = [{'result': 'OK'}]
-                    return JsonResponse(data, safe=False)
+                    data = {'result': 'OK'}
+                    return JsonResponse(data)
                 elif request.method == 'DELETE':
                     post_id = request.GET.get('post_id')
                     post = BlogPost.objects.get(id=post_id)
                     post.delete()
-                    data = [{'result': 'OK'}]
-                    return JsonResponse(data, safe=False)
+                    data = {'result': 'OK'}
+                    return JsonResponse(data)
             else:
                 data = {'Error message:': 'Your token has been expired'}
                 return JsonResponse(data)
@@ -109,29 +109,29 @@ class RestApi:
             return JsonResponse(data)
 
 
-def register(request):
-    if request.method == 'POST':
-        user_data = UserForm(request.POST, prefix='user')
-        if user_data.is_valid():
-            if re.match(r'[A-Za-z0-9]{6,}', user_data.cleaned_data['password']):
-                user_data.save()
-                user = User.objects.get(username=user_data['username'].value())
-                d = timedelta(days=2)
-                expire_date = datetime.now() + d
-                my_token = default_token_generator.make_token(user)
-                # print(my_token)
-                token = ApiToken(token_content=my_token, token_expired=expire_date,
-                                 token_clientId=user)
-                token.save()
-                print(token)
-                return HttpResponse(token.token_content)
-            else:
-                user_data.add_error('password', 'your password must required combination of A-Z, a-z, 0-9 and at '
-                                                'least 6 characters')
-    else:
-        user_data = UserForm(prefix='user')
-        print(user_data.as_ul())
-    return shortcuts.render(request, "rest/register.html", {"form": user_data})
+class UserActivity:
+    def register(request):
+        if request.method == 'POST':
+            user_data = UserForm(request.POST, prefix='user')
+            if user_data.is_valid():
+                if re.match(r'[A-Za-z0-9]{6,}', user_data.cleaned_data['password']):
+                    user_data.save()
+                    user = User.objects.get(username=user_data['username'].value())
+                    d = timedelta(days=2)
+                    expire_date = datetime.now() + d
+                    my_token = default_token_generator.make_token(user)
+                    token = ApiToken(token_content=my_token,
+                                     token_expired=expire_date,
+                                     token_clientId=user)
+                    token.save()
+                    return HttpResponse(token.token_content)
+                else:
+                    user_data.add_error('password', 'your password must required combination '
+                                                    'of A-Z, a-z, 0-9 and at '
+                                                    'least 6 characters')
+        else:
+            user_data = UserForm(prefix='user')
+        return shortcuts.render(request, "rest/register.html", {"form": user_data})
 
     # def login(request):
     # username = request.POST['username']

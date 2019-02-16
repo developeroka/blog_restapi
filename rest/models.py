@@ -29,5 +29,5 @@ class BlogPost(models.Model):
 
 class ApiToken(models.Model):
     token_content = models.CharField(max_length=256)
-    token_expired = models.DateTimeField(null=True)
-    token_clientId = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    token_expired = models.DateTimeField()
+    token_clientId = models.ForeignKey(User, on_delete=models.CASCADE)
