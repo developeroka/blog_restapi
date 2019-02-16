@@ -52,7 +52,7 @@ class RestApi:
                         else:
                             client_id = res_token.first().token_clientId
                             post_query = BlogPost.objects.filter(
-                                Q(post_privacy='public') or
+                                Q(post_privacy='public') |
                                 Q(post_author=client_id)
                              )[first_numb:last_numb]
                             data = [{'post_title': a.post_title,
@@ -67,13 +67,12 @@ class RestApi:
                         data = {'Error message:': 'You can\'t request more than 5 items'}
                         return JsonResponse(data)
                 elif request.method == 'POST':
-                    print(request.META['HTTP_AUTHORIZATION'])
                     title = request.POST['post_title']
                     content = request.POST['post_content']
                     author = request.POST['post_author']
                     category = request.POST['post_category']
                     post_author = User.objects.get(username=author)
-                    post_category = PostCategory.objects.get(category_name=category)
+                    post_category = PostCategory.objects.get(id=category)
                     new_post = BlogPost.objects.create(post_title=title, post_content=content, post_author=post_author,
                                                        post_category=post_category)
                     new_post.save()
