@@ -7,6 +7,7 @@ from django.contrib.auth.tokens import default_token_generator
 from rest.forms import UserForm
 from django import shortcuts
 from datetime import datetime, timedelta
+import pytz
 import re
 
 
@@ -17,8 +18,9 @@ class RestApi:
         if req_token is not None:
             res_token = ApiToken.objects.filter(token_content=req_token)
             if res_token.first() is not None:
-                token_expired = res_token.first().token_expired.date()
-                if token_expired > datetime.now().date():
+                token_expired = res_token.first().token_expired
+                iran = pytz.timezone('Iran')
+                if token_expired > datetime.now(iran):
                     if request.method == 'GET':
                         first_item = request.GET.get('first_item')
                         last_item = request.GET.get('last_item')
@@ -98,7 +100,7 @@ class RestApi:
                         data = {'result': 'OK'}
                         return JsonResponse(data)
                 else:
-                    data = {'Error message:': 'Your token has been expired'}
+                    data = {'Error message:': 'Your token has been expired, you must login again for new token :) '}
                     return JsonResponse(data)
             else:
                 data = {'Error message:': 'not available Token'}
@@ -116,8 +118,9 @@ class UserActivity:
                 if re.match(r'[A-Za-z0-9]{6,}', user_data.cleaned_data['password']):
                     user_data.save()
                     user = User.objects.get(username=user_data['username'].value())
-                    d = timedelta(days=2)
-                    expire_date = datetime.now() + d
+                    d = timedelta(minutes=5)
+                    iran = pytz.timezone('Iran')
+                    expire_date = datetime.now(iran) + d
                     my_token = default_token_generator.make_token(user)
                     token = ApiToken(token_content=my_token,
                                      token_expired=expire_date,
