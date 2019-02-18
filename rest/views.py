@@ -19,8 +19,8 @@ class RestApi:
             res_token = ApiToken.objects.filter(token_content=req_token)
             if res_token.first() is not None:
                 token_expired = res_token.first().token_expired
-                iran = pytz.timezone('Iran')
-                if token_expired > datetime.now(iran):
+                # iran = pytz.timezone('Iran')
+                if datetime.strptime(str(token_expired)[:19], "%Y-%m-%d %H:%M:%S") > datetime.now():
                     if request.method == 'GET':
                         first_item = request.GET.get('first_item')
                         last_item = request.GET.get('last_item')
@@ -119,8 +119,7 @@ class UserActivity:
                     user_data.save()
                     user = User.objects.get(username=user_data['username'].value())
                     d = timedelta(minutes=5)
-                    iran = pytz.timezone('Iran')
-                    expire_date = datetime.now(iran) + d
+                    expire_date = datetime.now() + d
                     my_token = default_token_generator.make_token(user)
                     token = ApiToken(token_content=my_token,
                                      token_expired=expire_date,
