@@ -12,7 +12,6 @@ class PostCategory(models.Model):
 
 
 class BlogPost(models.Model):
-
     Public = 'public'
     Private = 'private'
     privacy_choices = ((Public, 'public'),
