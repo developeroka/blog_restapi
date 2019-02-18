@@ -141,9 +141,16 @@ class UserActivity:
             password = request.POST['password']
             user = User.objects.get(username=username, password=password)
             if user is not None:
-                return JsonResponse({'data': 'Token'})
+                d = timedelta(minutes=5)
+                expire_date = datetime.now() + d
+                my_token = default_token_generator.make_token(user)
+                token = ApiToken(token_content=my_token,
+                                 token_expired=expire_date,
+                                 token_clientId=user)
+                token.save()
+                return JsonResponse({'data': token})
             else:
-                return HttpResponse('Return an \'invalid login\' error message.')
+                return HttpResponse('this user is not available')
         else:
             user_data = UserForm()
             return shortcuts.render(request, "rest/register.html", {"form": user_data})
