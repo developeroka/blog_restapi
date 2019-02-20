@@ -5,7 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/rest/views.py" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="uploading views.py again">
+    <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest/models.py" afterDir="false" />
@@ -42,14 +42,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="19" column="63" lean-forward="true" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
+            <state relative-caret-position="2370">
+              <caret line="167" column="62" selection-start-line="167" selection-start-column="62" selection-end-line="167" selection-end-column="62" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
-                <element signature="e#6471#9307#0" />
-                <element signature="e#6544#8024#0" />
-                <element signature="e#6585#7770#0" />
-                <element signature="e#8059#9307#0" />
               </folding>
             </state>
           </provider>
@@ -109,8 +105,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
+            <state relative-caret-position="261">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <element signature="e#113#354#0" />
@@ -269,9 +265,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="Api.settings" />
       </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/env/bin/python" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -352,7 +348,8 @@
       <workItem from="1550647389680" duration="1787000" />
       <workItem from="1550649205982" duration="806000" />
       <workItem from="1550653360894" duration="475000" />
-      <workItem from="1550653878479" duration="234000" />
+      <workItem from="1550653878479" duration="697000" />
+      <workItem from="1550654652936" duration="408000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -410,11 +407,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550489619608</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="user added to token model">
+      <created>1550654131522</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1550654131522</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184632000" />
+    <option name="totallyTimeSpent" value="185503000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -435,15 +439,15 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3273906" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772727" weight="0.3241491" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.66439396" visible="true" weight="0.41166937" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7219697" weight="0.41166937" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49848485" weight="0.38249594" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32901135" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25454545" side_tool="true" weight="0.26904377" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.74545455" visible="true" weight="0.26904377" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25530303" side_tool="true" weight="0.3743922" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.744697" visible="true" weight="0.3743922" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49848485" weight="0.3273906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -490,7 +494,8 @@
     <MESSAGE value="expiration of tokens has been done" />
     <MESSAGE value="comparing different datetimes has been done" />
     <MESSAGE value="uploading views.py again" />
-    <option name="LAST_COMMIT_MESSAGE" value="uploading views.py again" />
+    <MESSAGE value="user added to token model" />
+    <option name="LAST_COMMIT_MESSAGE" value="user added to token model" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.html">
@@ -679,14 +684,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="19" column="63" lean-forward="true" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
+        <state relative-caret-position="2370">
+          <caret line="167" column="62" selection-start-line="167" selection-start-column="62" selection-end-line="167" selection-end-column="62" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
-            <element signature="e#6471#9307#0" />
-            <element signature="e#6544#8024#0" />
-            <element signature="e#6585#7770#0" />
-            <element signature="e#8059#9307#0" />
           </folding>
         </state>
       </provider>
@@ -741,8 +742,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
+        <state relative-caret-position="261">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
             <element signature="e#113#354#0" />

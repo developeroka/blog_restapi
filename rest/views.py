@@ -165,6 +165,7 @@ class UserActivity:
             else:
                 return JsonResponse({'Error': 'this user is not available'})
         else:
+            print(User.objects.get(username='developeroka').id)
             user_form = UserForm
             token_form = TokenForm
             return shortcuts.render(request, UserActivity._template_name, {
