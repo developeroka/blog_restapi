@@ -71,10 +71,19 @@ class RestApi:
                         category = request.POST['post_category']
                         post_author = User.objects.get(username=author)
                         post_category = PostCategory.objects.get(id=category)
-                        new_post = BlogPost.objects.create(post_title=title, post_content=content, post_author=post_author,
-                                                           post_category=post_category)
+                        new_post = BlogPost.objects.create(
+                            post_title=title,
+                            post_content=content,
+                            post_author=post_author,
+                            post_category=post_category
+                        )
                         new_post.save()
-                        data = {'result': 'OK'}
+                        data = {'result': 'OK',
+                                'post-title': title,
+                                'post-content': content,
+                                'post-author': author,
+                                'post-category': post_category.category_title
+                                }
                         return JsonResponse(data)
                     elif request.method == 'PUT':
                         post_id = request.GET.get('post_id')
@@ -90,16 +99,17 @@ class RestApi:
                             post_category = PostCategory.objects.get(category_name=request.GET.get('post_category'))
                             post.post_category = post_category
                         post.save()
-                        data = {'result': 'OK'}
+                        data = {'result': 'The \' ' + str(post.id) + '-' + post.post_title + '\' ' +
+                                'post has been changed successfully. '}
                         return JsonResponse(data)
                     elif request.method == 'DELETE':
                         post_id = request.GET.get('post_id')
                         post = BlogPost.objects.get(id=post_id)
                         post.delete()
-                        data = {'result': 'OK'}
+                        data = {'result': 'The \' ' + str(post.id) + 'post has been deleted successfully. '}
                         return JsonResponse(data)
                 else:
-                    data = {'Error message:': 'Your token has been expired, you must login again for new token :) '}
+                    data = {'Error message:': 'Your token has been expired, you must login again for new token.'}
                     return JsonResponse(data)
             else:
                 data = {'Error message:': 'not available Token'}
