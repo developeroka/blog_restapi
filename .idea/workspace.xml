@@ -6,8 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rest/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="124" column="42" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="42" />
+            <state relative-caret-position="194">
+              <caret line="159" column="59" selection-start-line="159" selection-start-column="59" selection-end-line="159" selection-end-column="59" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
               </folding>
@@ -51,19 +51,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
+        <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/views/decorators/csrf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="123" selection-start-line="123" selection-end-line="123" />
+            <state relative-caret-position="178">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/forms/forms.py">
+        <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2505">
-              <caret line="182" column="8" selection-start-line="182" selection-start-column="8" selection-end-line="182" selection-end-column="8" />
+            <state relative-caret-position="104">
+              <caret line="157" selection-start-line="157" selection-end-line="157" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="104">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -113,8 +122,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rest/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="232">
+              <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
                 <element signature="e#113#354#0" />
@@ -362,7 +371,7 @@
       <workItem from="1550655861638" duration="376000" />
       <workItem from="1550656239470" duration="179000" />
       <workItem from="1550656450800" duration="1588000" />
-      <workItem from="1550658281910" duration="150000" />
+      <workItem from="1550658281910" duration="2123000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -434,11 +443,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550655311564</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="clientIds change to user">
+      <created>1550658557022</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1550658557023</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="188595000" />
+    <option name="totallyTimeSpent" value="190568000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -451,7 +467,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="741" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.19545455" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -459,7 +474,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3273906" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772727" weight="0.3241491" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7219697" visible="true" weight="0.41166937" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.7219697" weight="0.41166937" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6606061" weight="0.38249594" />
@@ -467,7 +482,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32901135" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25681818" side_tool="true" weight="0.3743922" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.7431818" weight="0.37277147" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.7431818" visible="true" weight="0.37277147" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49772727" weight="0.3273906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -516,7 +531,8 @@
     <MESSAGE value="uploading views.py again" />
     <MESSAGE value="user added to token model" />
     <MESSAGE value="nullable fields change to non-nullable in models" />
-    <option name="LAST_COMMIT_MESSAGE" value="nullable fields change to non-nullable in models" />
+    <MESSAGE value="clientIds change to user" />
+    <option name="LAST_COMMIT_MESSAGE" value="clientIds change to user" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -530,10 +546,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest/migrations/__init__.py" />
     <entry file="file://$PROJECT_DIR$/env/lib64/python3.6/site-packages/pkg_resources/_vendor/packaging/requirements.py" />
     <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/http/response.py" />
     <entry file="file://$PROJECT_DIR$/env/bin/django-admin" />
@@ -748,15 +760,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/models.py">
+    <entry file="file://$PROJECT_DIR$/rest/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="157" selection-start-line="157" selection-end-line="157" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
           <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#113#354#0" />
-            <element signature="e#307#354#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -767,24 +788,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/views/decorators/csrf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
+        <state relative-caret-position="178">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/urls.py">
+    <entry file="file://$PROJECT_DIR$/rest/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="232">
+          <caret line="35" column="37" selection-start-line="35" selection-start-column="37" selection-end-line="35" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#113#354#0" />
+            <element signature="e#307#354#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="124" column="42" selection-start-line="124" selection-start-column="42" selection-end-line="124" selection-end-column="42" />
+        <state relative-caret-position="194">
+          <caret line="159" column="59" selection-start-line="159" selection-start-column="59" selection-end-line="159" selection-end-column="59" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>

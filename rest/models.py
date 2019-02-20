@@ -31,3 +31,6 @@ class ApiToken(models.Model):
     token_expired = models.DateTimeField()
     token_clientId = models.CharField(max_length=500)
     token_user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.token_content)

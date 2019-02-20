@@ -123,7 +123,7 @@ class UserActivity:
                     user = User.objects.get(username=user_data.cleaned_data['username'])
                     time_difference = timedelta(minutes=5)
                     expire_date = timezone.now() + time_difference
-                    my_token = salted_hmac('key salt', 'value').hexdigest()
+                    my_token = salted_hmac(client_id, user).hexdigest()
                     token = ApiToken(token_content=my_token,
                                      token_expired=expire_date,
                                      token_clientId=client_id,
@@ -156,8 +156,8 @@ class UserActivity:
             user = User.objects.filter(username=username, password=password) or None
             if user is not None:
                 time_difference = timedelta(minutes=5)
-                expire_date = datetime.now() + time_difference
-                my_token = str(salted_hmac('user', user).hexdigest())
+                expire_date = timezone.now() + time_difference
+                my_token = str(salted_hmac(datetime.now(), user).hexdigest())
                 token = ApiToken(token_content=my_token,
                                  token_expired=expire_date,
                                  token_clientId=client_id,
