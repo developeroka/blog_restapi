@@ -7,6 +7,7 @@ from django.contrib.auth.tokens import default_token_generator, salted_hmac
 from rest.forms import UserForm, TokenForm
 from django import shortcuts
 from datetime import datetime, timedelta
+from django.utils import timezone
 import re
 
 
@@ -31,9 +32,9 @@ class RestApi:
                         post_id = request.GET.get('post_id')
                         if item_delta < 5:
                             if post_id is not None:
-                                client = res_token.first().token_clientId
+                                user = res_token.first().token_user
                                 post_query = BlogPost.objects.get(id=post_id)
-                                if post_query.post_author == client or post_query.post_privacy == "public":
+                                if post_query.post_author == user or post_query.post_privacy == "public":
                                     my_queryset = BlogPost.objects.get(id=post_id)
                                     data = {'post_title': my_queryset.post_title,
                                             'post_content': my_queryset.post_content,
@@ -47,10 +48,10 @@ class RestApi:
                                     data = {'Error message:': 'you\'re not able to see this post'}
                                     return JsonResponse(data)
                             else:
-                                client_id = res_token.first().token_clientId
+                                user = res_token.first().token_user
                                 post_query = BlogPost.objects.filter(
                                     Q(post_privacy='public') |
-                                    Q(post_author=client_id)
+                                    Q(post_author=user)
                                  )[first_numb:last_numb]
                                 data = [{'post_title': a.post_title,
                                          'post_content': a.post_content,
@@ -119,12 +120,14 @@ class UserActivity:
             if user_data.is_valid():
                 if re.match(r'[A-Za-z0-9]{6,}', user_data.cleaned_data['password']):
                     user_data.save()
+                    user = User.objects.get(username=user_data.cleaned_data['username'])
                     time_difference = timedelta(minutes=5)
-                    expire_date = datetime.now() + time_difference
+                    expire_date = timezone.now() + time_difference
                     my_token = salted_hmac('key salt', 'value').hexdigest()
                     token = ApiToken(token_content=my_token,
                                      token_expired=expire_date,
-                                     token_clientId=client_id)
+                                     token_clientId=client_id,
+                                     token_user=user)
                     token.save()
                     return JsonResponse(
                         {'token: ': token.token_content,
@@ -138,10 +141,10 @@ class UserActivity:
         else:
             user_form = UserForm
             token_form = TokenForm
-            return shortcuts.render(request, UserActivity._template_name, {
-                'user_form': user_form,
-                'token_form': token_form
-            })
+        return shortcuts.render(request, UserActivity._template_name, {
+            'user_form': user_form,
+            'token_form': token_form
+        })
 
     def login(request):
 
@@ -157,7 +160,8 @@ class UserActivity:
                 my_token = str(salted_hmac('user', user).hexdigest())
                 token = ApiToken(token_content=my_token,
                                  token_expired=expire_date,
-                                 token_clientId=client_id)
+                                 token_clientId=client_id,
+                                 token_user=user.first())
                 token.save()
                 return JsonResponse({'token': token.token_content,
                                      'expired': token.token_expired,
@@ -165,7 +169,6 @@ class UserActivity:
             else:
                 return JsonResponse({'Error': 'this user is not available'})
         else:
-            print(User.objects.get(username='developeroka').id)
             user_form = UserForm
             token_form = TokenForm
             return shortcuts.render(request, UserActivity._template_name, {
