@@ -30,3 +30,4 @@ class ApiToken(models.Model):
     token_content = models.CharField(max_length=256)
     token_expired = models.DateTimeField()
     token_clientId = models.CharField(max_length=500)
+

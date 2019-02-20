@@ -109,27 +109,27 @@ class RestApi:
 
 
 class UserActivity:
-    template_name = 'rest/login.html'
+    _template_name = 'rest/login.html'
 
     def register(request):
 
         if request.method == 'POST':
             user_data = UserForm(request.POST)
-            _client_id = request.POST['token_clientId']
+            client_id = request.POST['token_clientId']
             if user_data.is_valid():
                 if re.match(r'[A-Za-z0-9]{6,}', user_data.cleaned_data['password']):
                     user_data.save()
-                    _time_difference = timedelta(minutes=5)
-                    _expire_date = datetime.now() + _time_difference
-                    _my_token = salted_hmac('key salt', 'value').hexdigest()
-                    _token = ApiToken(token_content=_my_token,
-                                      token_expired=_expire_date,
-                                      token_clientId=_client_id)
-                    _token.save()
+                    time_difference = timedelta(minutes=5)
+                    expire_date = datetime.now() + time_difference
+                    my_token = salted_hmac('key salt', 'value').hexdigest()
+                    token = ApiToken(token_content=my_token,
+                                     token_expired=expire_date,
+                                     token_clientId=client_id)
+                    token.save()
                     return JsonResponse(
-                        {'token: ': _token.token_content,
-                         'expired: ':  _token.token_expired,
-                         'clientId': _token.token_clientId
+                        {'token: ': token.token_content,
+                         'expired: ':  token.token_expired,
+                         'clientId': token.token_clientId
                          })
                 else:
                     user_data.add_error('password', 'your password must required combination '
@@ -138,36 +138,36 @@ class UserActivity:
         else:
             user_form = UserForm
             token_form = TokenForm
-        return shortcuts.render(request, UserActivity.template_name, {
-            'user_form': user_form,
-            'token_form': token_form
-        })
+            return shortcuts.render(request, UserActivity._template_name, {
+                'user_form': user_form,
+                'token_form': token_form
+            })
 
     def login(request):
 
         if request.method == 'POST':
-            _username = request.POST['username']
-            _password = request.POST['password']
-            _client_id = request.POST['token_clientId']
+            username = request.POST['username']
+            password = request.POST['password']
+            client_id = request.POST['token_clientId']
 
-            _user = User.objects.filter(username=_username, password=_password)
-            if _user is not None:
-                _time_difference = timedelta(minutes=5)
-                _expire_date = datetime.now() + _time_difference
-                _my_token = str(salted_hmac('user', _user).hexdigest())
-                _token = ApiToken(token_content=_my_token,
-                                  token_expired=_expire_date,
-                                  token_clientId=_client_id)
-                _token.save()
-                return JsonResponse({'token': _token.token_content,
-                                     'expired': _token.token_expired,
-                                     'clientId': _token.token_clientId})
+            user = User.objects.filter(username=username, password=password) or None
+            if user is not None:
+                time_difference = timedelta(minutes=5)
+                expire_date = datetime.now() + time_difference
+                my_token = str(salted_hmac('user', user).hexdigest())
+                token = ApiToken(token_content=my_token,
+                                 token_expired=expire_date,
+                                 token_clientId=client_id)
+                token.save()
+                return JsonResponse({'token': token.token_content,
+                                     'expired': token.token_expired,
+                                     'clientId': token.token_clientId})
             else:
                 return JsonResponse({'Error': 'this user is not available'})
         else:
             user_form = UserForm
             token_form = TokenForm
-            return shortcuts.render(request, UserActivity.template_name, {
+            return shortcuts.render(request, UserActivity._template_name, {
                 'user_form': user_form,
                 'token_form': token_form
             })
