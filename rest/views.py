@@ -3,11 +3,10 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest.models import BlogPost, PostCategory, ApiToken
 from django.contrib.auth.models import User
-from django.contrib.auth.tokens import default_token_generator
-from rest.forms import UserForm
+from django.contrib.auth.tokens import default_token_generator, salted_hmac
+from rest.forms import UserForm, TokenForm
 from django import shortcuts
 from datetime import datetime, timedelta
-import pytz
 import re
 
 
@@ -19,7 +18,6 @@ class RestApi:
             res_token = ApiToken.objects.filter(token_content=req_token)
             if res_token.first() is not None:
                 token_expired = res_token.first().token_expired
-                # iran = pytz.timezone('Iran')
                 if datetime.strptime(str(token_expired)[:19], "%Y-%m-%d %H:%M:%S") > datetime.now():
                     if request.method == 'GET':
                         first_item = request.GET.get('first_item')
@@ -111,49 +109,70 @@ class RestApi:
 
 
 class UserActivity:
+    template_name = 'rest/login.html'
+
     def register(request):
+
         if request.method == 'POST':
-            user_data = UserForm(request.POST, prefix='user')
+            user_data = UserForm(request.POST)
+            _client_id = request.POST['token_clientId']
             if user_data.is_valid():
                 if re.match(r'[A-Za-z0-9]{6,}', user_data.cleaned_data['password']):
                     user_data.save()
-                    user = User.objects.get(username=user_data['username'].value())
-                    d = timedelta(minutes=5)
-                    expire_date = datetime.now() + d
-                    my_token = default_token_generator.make_token(user)
-                    token = ApiToken(token_content=my_token,
-                                     token_expired=expire_date,
-                                     token_clientId=user)
-                    token.save()
-                    return HttpResponse(token.token_content)
+                    _time_difference = timedelta(minutes=5)
+                    _expire_date = datetime.now() + _time_difference
+                    _my_token = salted_hmac('key salt', 'value').hexdigest()
+                    _token = ApiToken(token_content=_my_token,
+                                      token_expired=_expire_date,
+                                      token_clientId=_client_id)
+                    _token.save()
+                    return JsonResponse(
+                        {'token: ': _token.token_content,
+                         'expired: ':  _token.token_expired,
+                         'clientId': _token.token_clientId
+                         })
                 else:
                     user_data.add_error('password', 'your password must required combination '
                                                     'of A-Z, a-z, 0-9 and at '
                                                     'least 6 characters')
         else:
-            user_data = UserForm(prefix='user')
-        return shortcuts.render(request, "rest/register.html", {"form": user_data})
+            user_form = UserForm
+            token_form = TokenForm
+        return shortcuts.render(request, UserActivity.template_name, {
+            'user_form': user_form,
+            'token_form': token_form
+        })
 
     def login(request):
+
         if request.method == 'POST':
-            # user_data = UserForm(request.POST)
-            username = request.POST['username']
-            password = request.POST['password']
-            user = User.objects.get(username=username, password=password)
-            if user is not None:
-                d = timedelta(minutes=5)
-                expire_date = datetime.now() + d
-                my_token = default_token_generator.make_token(user)
-                token = ApiToken(token_content=my_token,
-                                 token_expired=expire_date,
-                                 token_clientId=user)
-                token.save()
-                return JsonResponse({'data': token})
+            _username = request.POST['username']
+            _password = request.POST['password']
+            _client_id = request.POST['token_clientId']
+
+            _user = User.objects.filter(username=_username, password=_password)
+            if _user is not None:
+                _time_difference = timedelta(minutes=5)
+                _expire_date = datetime.now() + _time_difference
+                _my_token = str(salted_hmac('user', _user).hexdigest())
+                _token = ApiToken(token_content=_my_token,
+                                  token_expired=_expire_date,
+                                  token_clientId=_client_id)
+                _token.save()
+                return JsonResponse({'token': _token.token_content,
+                                     'expired': _token.token_expired,
+                                     'clientId': _token.token_clientId})
             else:
-                return HttpResponse('this user is not available')
+                return JsonResponse({'Error': 'this user is not available'})
         else:
-            user_data = UserForm()
-            return shortcuts.render(request, "rest/register.html", {"form": user_data})
+            user_form = UserForm
+            token_form = TokenForm
+            return shortcuts.render(request, UserActivity.template_name, {
+                'user_form': user_form,
+                'token_form': token_form
+            })
+
+
 
 
 

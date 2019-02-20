@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from rest.models import ApiToken
 
 
 class UserForm(forms.ModelForm):
@@ -7,3 +8,8 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'password')
 
+
+class TokenForm(forms.ModelForm):
+    class Meta:
+        model = ApiToken
+        fields = ('token_clientId',)
