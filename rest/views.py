@@ -31,12 +31,11 @@ class RestApi:
                             user = res_token.token_user
                             post_query = BlogPost.objects.get(id=post_id)
                             if post_query.post_author == user or post_query.post_privacy == "public":
-                                my_queryset = BlogPost.objects.get(id=post_id)
-                                data = {'post_title': my_queryset.post_title,
-                                        'post_content': my_queryset.post_content,
-                                        'post_id': my_queryset.id,
-                                        'post_author': my_queryset.post_author.username,
-                                        'post_category': my_queryset.post_category.category_name
+                                data = {'post_title': post_query.post_title,
+                                        'post_content': post_query.post_content,
+                                        'post_id': post_query.id,
+                                        'post_author': post_query.post_author.username,
+                                        'post_category': post_query.post_category.category_name
                                         }
                                 response = JsonResponse(data)
                                 return response
@@ -71,53 +70,85 @@ class RestApi:
 
                             except Exception as e:
                                 return JsonResponse({"Error": str(e)})
-
                     elif request.method == 'POST':
-                        title = request.POST['post_title']
-                        content = request.POST['post_content']
-                        author = request.POST['post_author']
-                        category = request.POST['post_category']
-                        post_author = User.objects.get(username=author)
-                        post_category = PostCategory.objects.get(id=category)
-                        new_post = BlogPost.objects.create(
-                            post_title=title,
-                            post_content=content,
-                            post_author=post_author,
-                            post_category=post_category
-                        )
-                        new_post.save()
-                        data = {'result': 'OK',
-                                'post-title': title,
-                                'post-content': content,
-                                'post-author': author,
-                                'post-category': post_category.category_title
-                                }
-                        return JsonResponse(data)
+                        title = request.POST.get('post_title')
+                        content = request.POST.get('post_content')
+                        author = request.POST.get('post_author')
+                        category = request.POST.get('post_category')
+                        if (title and content and author and category) is not None:
+                            post_author = User.objects.filter(username=author)
+                            if post_author.first():
+                                post_category = PostCategory.objects.filter(id=category)
+                                if post_category.first():
+                                    new_post = BlogPost.objects.create(
+                                        post_title=title,
+                                        post_content=content,
+                                        post_author=post_author.first(),
+                                        post_category=post_category.first()
+                                    )
+                                    new_post.save()
+                                    data = {'result': 'OK',
+                                            'post-title': title,
+                                            'post-content': content,
+                                            'post-author': author,
+                                            'post-category': post_category.first().category_title
+                                            }
+                                    return JsonResponse(data)
+                                else:
+                                    data = {'result': 'insert a valid category(id)'}
+                                    return JsonResponse(data)
+                            else:
+                                data = {'result': 'insert a valid author(user)'}
+                                return JsonResponse(data)
+                        else:
+                            data = {'result': 'insert title, content, author and category id of the post'}
+                            return JsonResponse(data)
                     elif request.method == 'PUT':
                         post_id = request.GET.get('post_id')
-                        post = BlogPost.objects.get(id=post_id)
-                        if request.GET.get('post_title') is not None:
-                            post.post_title = request.GET.get('post_title')
-                        elif request.GET.get('post_content') is not None:
-                            post.post_content = request.GET.get('post_content')
-                        elif request.GET.get('post_author') is not None:
-                            post_author = User.objects.get(username=request.GET.get('post_author'))
-                            post.post_author = post_author
-                        elif request.GET.get('post_category') is not None:
-                            post_category = PostCategory.objects.get(category_name=request.GET.get('post_category'))
-                            post.post_category = post_category
-                        post.save()
-                        data = {'result': 'The \' ' + str(post.id) + '-' + post.post_title + '\' ' +
-                                'post has been changed successfully. '}
-                        return JsonResponse(data)
+                        if post_id:
+                            post = BlogPost.objects.get(id=post_id)
+                            if request.GET.get('post_title') is not None:
+                                post.post_title = request.GET.get('post_title')
+                                post.save()
+                            elif request.GET.get('post_content') is not None:
+                                post.post_content = request.GET.get('post_content')
+                                post.save()
+                            elif request.GET.get('post_author') is not None:
+                                post_author = User.objects.get(username=request.GET.get('post_author'))
+                                post.post_author = post_author
+                                post.save()
+                            elif request.GET.get('post_category') is not None:
+                                post_category = PostCategory.objects.get(category_name=request.GET.get('post_category'))
+                                post.post_category = post_category
+                                post.save()
+                            else:
+                                data = {'result': 'insert your editing field'}
+                                return JsonResponse(data)
+
+                            data = {'result': 'The \' ' + str(post.id) + '-' + post.post_title + '\' ' +
+                                    'post has been changed successfully. '}
+                            return JsonResponse(data)
+                        else:
+                            data = {'result': 'insert a valid post id'}
+                            return JsonResponse(data)
                     elif request.method == 'DELETE':
                         post_id = request.GET.get('post_id')
-                        post = BlogPost.objects.get(id=post_id)
-                        post.delete()
-                        data = {'result': 'The \' ' + str(post.id) + 'post has been deleted successfully. '}
-                        return JsonResponse(data)
+                        if post_id:
+                            post = BlogPost.objects.filter(id=post_id).first()
+                            if post:
+                                deleted_id = post.id
+                                post.delete()
+                                data = {'result': 'The \' ' + str(deleted_id) + ' \'' +
+                                        ' post has been deleted successfully. '}
+                                return JsonResponse(data)
+                            else:
+                                data = {'result': 'insert a valid post id'}
+                                return JsonResponse(data)
+                        else:
+                            data = {'result': 'insert a post id'}
+                            return JsonResponse(data)
                 else:
-                    data = {'Error message:': 'Your token has been expired, you must login again for new token.'}
+                    data = {'Error message:': 'Your token has been expired, you must login again for new access token.'}
                     return JsonResponse(data)
             else:
                 data = {'Error message:': 'not available Token'}
