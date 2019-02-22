@@ -134,10 +134,9 @@ class UserActivity:
             username = request.POST['username']
             password = request.POST['password']
             client_id = request.POST['token_clientId']
-            regex = '[A-Za-z0-9@.+_-]{6,}'
 
             if user_form.is_valid():
-                if len(str(re.findall(regex, request.POST['password']))) - 4 == len(request.POST['password']):
+                if len(str()) - 4 == len(request.POST['password']):
                     user_form.save()
                     user = User.objects.get(username=username)
                     time_difference = timedelta(minutes=5)
@@ -175,13 +174,12 @@ class UserActivity:
             user_form = UserForm(request.POST)
             token_form = TokenForm(request.POST)
             client_id = request.POST['token_clientId']
-            regex = '[A-Za-z0-9@.+_-]{6,}'
+            password = request.POST['password']
+            username = request.POST['username']
 
-            if len(str(re.findall(regex, request.POST['password']))) - 4 == len(request.POST['password']):
-                password = request.POST['password']
+            if Utilities.RegEx.check_password_matching(password):
 
-                if len(str(re.findall(regex, request.POST['password']))) - 4 == len(request.POST['username']):
-                    username = request.POST['username']
+                if Utilities.RegEx.check_username_matching(username):
                     user = User.objects.get(Q(username=username) & Q(password=password)) or None
 
                     if user is not None:
@@ -200,13 +198,12 @@ class UserActivity:
                         return JsonResponse({'Error': 'this user is not available'})
                 else:
                     user_form.add_error('username', 'your username can only include '
-                                                    'A-Z, a-z, 0-9 and /@/./_/+'
-                                                    'and least 6 characters')
+                                                    'A-Z, a-z, 0-9 and /_/-'
+                                                    'and least 3 characters')
             else:
-                user_form.add_error('password', 'your username can only include '
-                                                'A-Z, a-z, 0-9 and /@/./_/+'
+                user_form.add_error('password', 'your password can only include '
+                                                'A-Z, a-z, 0-9 and /@/./_/+/-/'
                                                 'and least 6 characters')
-
         else:
             user_form = UserForm
             token_form = TokenForm
@@ -215,6 +212,36 @@ class UserActivity:
             'token_form': token_form
         })
 
+
+class Utilities:
+
+    class RegEx:
+
+        def check_password_matching(password):
+            regex = '[A-Za-z0-9@.+_-]{6,}'
+            user_password = str(password)
+            matching = re.findall(regex, user_password)
+            if matching:
+                matching_len = len(str(matching)) - 4
+                if matching_len == len(user_password):
+                    return True
+                else:
+                    return False
+            else:
+                return False
+
+        def check_username_matching(username):
+            regex = '[A-Za-z0-9+.@_-]{3,}'
+            user_name = str(username)
+            matching = re.findall(regex, user_name)
+            if matching:
+                matching_len = len(str(matching)) - 4
+                if matching_len == len(user_name):
+                    return True
+                else:
+                    return False
+            else:
+                return False
 
 
 
