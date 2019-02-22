@@ -16,56 +16,62 @@ class RestApi:
     def api(request):
         req_token = str(request.META['HTTP_AUTHORIZATION']).split(' ')[1]
         if req_token is not None:
-            res_token = ApiToken.objects.filter(token_content=req_token)
-            if res_token.first() is not None:
-                token_expired = res_token.first().token_expired
+            res_token = ApiToken.objects.get(token_content=req_token)
+
+            if res_token is not None:
+                token_expired = res_token.token_expired
                 if datetime.strptime(str(token_expired)[:19], "%Y-%m-%d %H:%M:%S") > datetime.now():
+                    time_difference = timedelta(minutes=5)
+                    token_expired += time_difference
+                    res_token.token_expired = token_expired
+                    res_token.save()
                     if request.method == 'GET':
-                        first_item = request.GET.get('first_item')
-                        last_item = request.GET.get('last_item')
-
-                        try:
-                            item_delta = int(last_item) - int(first_item)
-                            first_numb = int(first_item)
-                            last_numb = int(last_item)
-                        except Exception as e:
-                            return JsonResponse({"Error": e})
-
                         post_id = request.GET.get('post_id')
-                        if item_delta < 5:
-                            if post_id is not None:
-                                user = res_token.first().token_user
-                                post_query = BlogPost.objects.get(id=post_id)
-                                if post_query.post_author == user or post_query.post_privacy == "public":
-                                    my_queryset = BlogPost.objects.get(id=post_id)
-                                    data = {'post_title': my_queryset.post_title,
-                                            'post_content': my_queryset.post_content,
-                                            'post_id': my_queryset.id,
-                                            'post_author': my_queryset.post_author.username,
-                                            'post_category': my_queryset.post_category.category_name
-                                            }
-                                    response = JsonResponse(data)
-                                    return response
-                                else:
-                                    data = {'Error message:': 'you\'re not able to see this post'}
-                                    return JsonResponse(data)
+                        if post_id is not None:
+                            user = res_token.token_user
+                            post_query = BlogPost.objects.get(id=post_id)
+                            if post_query.post_author == user or post_query.post_privacy == "public":
+                                my_queryset = BlogPost.objects.get(id=post_id)
+                                data = {'post_title': my_queryset.post_title,
+                                        'post_content': my_queryset.post_content,
+                                        'post_id': my_queryset.id,
+                                        'post_author': my_queryset.post_author.username,
+                                        'post_category': my_queryset.post_category.category_name
+                                        }
+                                response = JsonResponse(data)
+                                return response
                             else:
-                                user = res_token.first().token_user
-                                post_query = BlogPost.objects.filter(
-                                    Q(post_privacy='public') |
-                                    Q(post_author=user)
-                                 )[first_numb:last_numb]
-                                data = [{'post_title': a.post_title,
-                                         'post_content': a.post_content,
-                                         'post_author': a.post_author.username,
-                                         'post_id': a.pk,
-                                         'post_privacy': str(a.post_privacy),
-                                         'post_category': a.post_category.category_name
-                                         } for a in post_query]
-                                return JsonResponse({'data': data})
+                                data = {'Error message:': 'you\'re not able to see this post'}
+                                return JsonResponse(data)
                         else:
-                            data = {'Error message:': 'You can\'t request more than 5 items'}
-                            return JsonResponse(data)
+                            try:
+                                first_item = request.GET.get('first_item')
+                                last_item = request.GET.get('last_item')
+                                first_numb = int(first_item)
+                                last_numb = int(last_item)
+                                item_delta = last_numb - first_numb
+
+                                if item_delta < 5:
+                                    user = res_token.token_user
+                                    post_query = BlogPost.objects.filter(
+                                        Q(post_privacy='public') |
+                                        Q(post_author=user)
+                                    )[first_numb:last_numb]
+                                    data = [{'post_title': a.post_title,
+                                             'post_content': a.post_content,
+                                             'post_author': a.post_author.username,
+                                             'post_id': a.pk,
+                                             'post_privacy': str(a.post_privacy),
+                                             'post_category': a.post_category.category_name
+                                             } for a in post_query]
+                                    return JsonResponse({'data': data})
+                                else:
+                                    data = {'Error message:': 'You can\'t request more than 5 items'}
+                                    return JsonResponse(data)
+
+                            except Exception as e:
+                                return JsonResponse({"Error": str(e)})
+
                     elif request.method == 'POST':
                         title = request.POST['post_title']
                         content = request.POST['post_content']
