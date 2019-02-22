@@ -134,9 +134,10 @@ class UserActivity:
             username = request.POST['username']
             password = request.POST['password']
             client_id = request.POST['token_clientId']
+            regex = '[A-Za-z0-9@.+_-]{6,}'
 
             if user_form.is_valid():
-                if re.match(r'[A-Za-z0-9]{6,}', password):
+                if len(str(re.findall(regex, request.POST['password']))) - 4 == len(request.POST['password']):
                     user_form.save()
                     user = User.objects.get(username=username)
                     time_difference = timedelta(minutes=5)
@@ -161,8 +162,8 @@ class UserActivity:
                                                     'of A-Z, a-z, 0-9 and at '
                                                     'least 6 characters')
         else:
-            user_form = UserForm(request.POST)
-            token_form = TokenForm(request.POST)
+            user_form = UserForm()
+            token_form = TokenForm()
         return shortcuts.render(request, UserActivity._template_register, {
             'user_form': user_form,
             'token_form': token_form
@@ -174,11 +175,12 @@ class UserActivity:
             user_form = UserForm(request.POST)
             token_form = TokenForm(request.POST)
             client_id = request.POST['token_clientId']
+            regex = '[A-Za-z0-9@.+_-]{6,}'
 
-            if re.match(r'[A-Za-z0-9]{6,}', request.POST['password']):
+            if len(str(re.findall(regex, request.POST['password']))) - 4 == len(request.POST['password']):
                 password = request.POST['password']
-                print(str(request.POST['username']))
-                if re.match(r'[A-Za-z0-9]{3,}', request.POST['username']):
+
+                if len(str(re.findall(regex, request.POST['password']))) - 4 == len(request.POST['username']):
                     username = request.POST['username']
                     user = User.objects.get(Q(username=username) & Q(password=password)) or None
 
@@ -197,12 +199,13 @@ class UserActivity:
                     else:
                         return JsonResponse({'Error': 'this user is not available'})
                 else:
-                    user_form.add_error('username', 'your username required '
-                                                    'A-Z, a-z, 0-9')
+                    user_form.add_error('username', 'your username can only include '
+                                                    'A-Z, a-z, 0-9 and /@/./_/+'
+                                                    'and least 6 characters')
             else:
-                user_form.add_error('password', 'your password required combination '
-                                                'of A-Z, a-z, 0-9 and at '
-                                                'least 6 characters')
+                user_form.add_error('password', 'your username can only include '
+                                                'A-Z, a-z, 0-9 and /@/./_/+'
+                                                'and least 6 characters')
 
         else:
             user_form = UserForm
