@@ -136,30 +136,35 @@ class UserActivity:
             client_id = request.POST['token_clientId']
 
             if user_form.is_valid():
-                if len(str()) - 4 == len(request.POST['password']):
-                    user_form.save()
-                    user = User.objects.get(username=username)
-                    time_difference = timedelta(minutes=5)
-                    expire_date = timezone.now() + time_difference
+                if Utilities.RegEx.check_username_matching(username):
+                    if Utilities.RegEx.check_password_matching(password):
+                        user_form.save()
+                        user = User.objects.get(username=username)
+                        time_difference = timedelta(minutes=5)
+                        expire_date = timezone.now() + time_difference
 
-                    """TODO : check why token/user _form doesn't have
-                     cleaned_data without breakpoint but it has with it...!"""
+                        """TODO : check why token/user _form doesn't have
+                         cleaned_data without breakpoint but it has with it...!"""
 
-                    my_token = salted_hmac(client_id, user).hexdigest()
-                    token = ApiToken(token_content=my_token,
-                                     token_expired=expire_date,
-                                     token_clientId=client_id,
-                                     token_user=user)
-                    token.save()
-                    return JsonResponse(
-                        {'token: ': token.token_content,
-                         'expired: ':  token.token_expired,
-                         'clientId': token.token_clientId
-                         })
+                        my_token = salted_hmac(client_id, user).hexdigest()
+                        token = ApiToken(token_content=my_token,
+                                         token_expired=expire_date,
+                                         token_clientId=client_id,
+                                         token_user=user)
+                        token.save()
+                        return JsonResponse(
+                            {'token: ': token.token_content,
+                             'expired: ':  token.token_expired,
+                             'clientId': token.token_clientId
+                             })
+                    else:
+                        user_form.add_error('password', 'your username can only include '
+                                                        'A-Z, a-z, 0-9 and /_/-'
+                                                        'and least 6 characters')
                 else:
-                    user_form.add_error('password', 'your password required combination '
-                                                    'of A-Z, a-z, 0-9 and at '
-                                                    'least 6 characters')
+                    user_form.add_error('username', 'your username can only include '
+                                                    'A-Z, a-z, 0-9 and /_/-'
+                                                    'and least 3 characters')
         else:
             user_form = UserForm()
             token_form = TokenForm()
