@@ -119,28 +119,32 @@ class RestApi:
                     elif request.method == 'PUT':
                         post_id = request.GET.get('post_id')
                         if post_id:
-                            post = BlogPost.objects.get(id=post_id)
-                            if request.GET.get('post_title') is not None:
-                                post.post_title = request.GET.get('post_title')
-                                post.save()
-                            elif request.GET.get('post_content') is not None:
-                                post.post_content = request.GET.get('post_content')
-                                post.save()
-                            elif request.GET.get('post_category') is not None:
-                                post_category = PostCategory.objects.filter(id=request.GET.get('post_category'))
-                                if post_category.first():
-                                    post.post_category = post_category.first()
+                            post = BlogPost.objects.filter(id=post_id)
+                            if post.first():
+                                if request.GET.get('post_title') is not None:
+                                    post.post_title = request.GET.get('post_title')
                                     post.save()
+                                elif request.GET.get('post_content') is not None:
+                                    post.post_content = request.GET.get('post_content')
+                                    post.save()
+                                elif request.GET.get('post_category') is not None:
+                                    post_category = PostCategory.objects.filter(id=request.GET.get('post_category'))
+                                    if post_category.first():
+                                        post.post_category = post_category.first()
+                                        post.save()
+                                    else:
+                                        data = {'result': 'insert available category'}
+                                        return JsonResponse(data)
                                 else:
-                                    data = {'result': 'insert available category'}
+                                    data = {'result': 'insert your editing field'}
                                     return JsonResponse(data)
-                            else:
-                                data = {'result': 'insert your editing field'}
-                                return JsonResponse(data)
 
-                            data = {'result': 'The \' ' + str(post.id) + '-' + post.post_title + '\' ' +
-                                    'post has been changed successfully. '}
-                            return JsonResponse(data)
+                                data = {'result': 'The \' ' + str(post.id) + '-' + post.post_title + '\' ' +
+                                        'post has been changed successfully. '}
+                                return JsonResponse(data)
+                            else:
+                                data = {'result': 'Insert a valid post id!'}
+                                return JsonResponse(data)
                         else:
                             data = {'result': 'insert a valid post id'}
                             return JsonResponse(data)

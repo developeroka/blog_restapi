@@ -5,7 +5,7 @@
     <bookmark url="file://$PROJECT_DIR$/rest/views.py" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="">
+    <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="check availability of receive objects">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest/views.py" afterDir="false" />
@@ -41,10 +41,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="127" column="43" selection-start-line="127" selection-start-column="43" selection-end-line="127" selection-end-column="43" />
+            <state relative-caret-position="410">
+              <caret line="145" column="74" selection-start-line="145" selection-start-column="74" selection-end-line="145" selection-end-column="74" />
               <folding>
                 <element signature="e#0#30#0" expanded="true" />
+                <element signature="e#1284#4527#0" />
+                <element signature="e#4603#7004#0" />
               </folding>
             </state>
           </provider>
@@ -429,7 +431,7 @@
       <workItem from="1550872994472" duration="1827000" />
       <workItem from="1550874852642" duration="1060000" />
       <workItem from="1550923408040" duration="1782000" />
-      <workItem from="1550925230531" duration="88000" />
+      <workItem from="1550925230531" duration="479000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -578,11 +580,18 @@
       <option name="project" value="LOCAL" />
       <updated>1550924984418</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="check availability of receive objects">
+      <created>1550925382417</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1550925382418</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="229877000" />
+    <option name="totallyTimeSpent" value="230268000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -603,7 +612,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3273906" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772727" weight="0.3241491" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7219697" visible="true" weight="0.1815235" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7219697" visible="true" weight="0.15721232" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6606061" weight="0.38249594" />
@@ -611,7 +620,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32901135" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25681818" side_tool="true" weight="0.3743922" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.7431818" weight="0.36953" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.7431818" weight="0.048622366" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49772727" weight="0.3273906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -671,7 +680,8 @@
     <MESSAGE value="check token existence" />
     <MESSAGE value="check token model existence" />
     <MESSAGE value="post authors given from token user id" />
-    <option name="LAST_COMMIT_MESSAGE" value="post authors given from token user id" />
+    <MESSAGE value="check availability of receive objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="check availability of receive objects" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/contrib/admin/static/admin/js/admin/DateTimeShortcuts.js">
@@ -969,10 +979,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="127" column="43" selection-start-line="127" selection-start-column="43" selection-end-line="127" selection-end-column="43" />
+        <state relative-caret-position="410">
+          <caret line="145" column="74" selection-start-line="145" selection-start-column="74" selection-end-line="145" selection-end-column="74" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#1284#4527#0" />
+            <element signature="e#4603#7004#0" />
           </folding>
         </state>
       </provider>
