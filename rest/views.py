@@ -14,8 +14,9 @@ import re
 class RestApi:
     @csrf_exempt
     def api(request):
-        req_token = str(request.META['HTTP_AUTHORIZATION']).split(' ')[1]
-        if req_token is not None:
+        sent_token = request.META.get('HTTP_AUTHORIZATION')
+        if sent_token is not None:
+            req_token = sent_token.split(' ')[1]
             res_token = ApiToken.objects.get(token_content=req_token)
 
             if res_token is not None:
