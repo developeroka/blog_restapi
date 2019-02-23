@@ -17,9 +17,9 @@ class RestApi:
         sent_token = request.META.get('HTTP_AUTHORIZATION')
         if sent_token is not None:
             req_token = sent_token.split(' ')[1]
-            res_token = ApiToken.objects.get(token_content=req_token)
+            res_token = ApiToken.objects.filter(token_content=req_token)
 
-            if res_token is not None:
+            if res_token.first():
                 token_expired = res_token.token_expired
                 if datetime.strptime(str(token_expired)[:19], "%Y-%m-%d %H:%M:%S") > datetime.now():
                     time_difference = timedelta(minutes=5)
