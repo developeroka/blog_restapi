@@ -18,30 +18,36 @@ class RestApi:
         if sent_token is not None:
             req_token = sent_token.split(' ')[1]
             res_token = ApiToken.objects.filter(token_content=req_token)
-
             if res_token.first():
-                token_expired = res_token.token_expired
+                available_token = res_token.first()
+                token_expired = available_token.token_expired
                 if datetime.strptime(str(token_expired)[:19], "%Y-%m-%d %H:%M:%S") > datetime.now():
                     time_difference = timedelta(minutes=5)
                     token_expired += time_difference
-                    res_token.token_expired = token_expired
-                    res_token.save()
+                    available_token.token_expired = token_expired
+                    available_token.save()
                     if request.method == 'GET':
                         post_id = request.GET.get('post_id')
-                        if post_id is not None:
-                            user = res_token.token_user
-                            post_query = BlogPost.objects.get(id=post_id)
-                            if post_query.post_author == user or post_query.post_privacy == "public":
-                                data = {'post_title': post_query.post_title,
-                                        'post_content': post_query.post_content,
-                                        'post_id': post_query.id,
-                                        'post_author': post_query.post_author.username,
-                                        'post_category': post_query.post_category.category_name
-                                        }
-                                response = JsonResponse(data)
-                                return response
+                        if post_id:
+                            user = available_token.token_user
+                            post_query = BlogPost.objects.filter(id=post_id)
+                            if post_query.first():
+                                if post_query.first().post_author == user or \
+                                        post_query.first().post_privacy == 'public':
+                                    data = {'post_title': post_query.first().post_title,
+                                            'post_content': post_query.first().post_content,
+                                            'post_id': post_query.first().id,
+                                            'post_author': post_query.first().post_author.username,
+                                            'post_category': post_query.first().post_category.category_name,
+                                            'post_privacy': post_query.first().post_privacy
+                                            }
+                                    response = JsonResponse(data)
+                                    return response
+                                else:
+                                    data = {'Error message:': 'you\'re not able to see this post'}
+                                    return JsonResponse(data)
                             else:
-                                data = {'Error message:': 'you\'re not able to see this post'}
+                                data = {'Error message:': 'this post is not valid'}
                                 return JsonResponse(data)
                         else:
                             try:
@@ -52,7 +58,7 @@ class RestApi:
                                 item_delta = last_numb - first_numb
 
                                 if item_delta < 5:
-                                    user = res_token.token_user
+                                    user = available_token.token_user
                                     post_query = BlogPost.objects.filter(
                                         Q(post_privacy='public') |
                                         Q(post_author=user)
@@ -72,27 +78,33 @@ class RestApi:
                             except Exception as e:
                                 return JsonResponse({"Error": str(e)})
                     elif request.method == 'POST':
+                        user = available_token.token_user
                         title = request.POST.get('post_title')
                         content = request.POST.get('post_content')
-                        author = request.POST.get('post_author')
                         category = request.POST.get('post_category')
-                        if (title and content and author and category) is not None:
-                            post_author = User.objects.filter(username=author)
-                            if post_author.first():
-                                post_category = PostCategory.objects.filter(id=category)
-                                if post_category.first():
+                        privacy = request.POST.get('post_privacy')
+                        post_privacy = 'public'
+                        if (title and content and category and privacy) is not None:
+                            post_author = user
+                            if post_author:
+                                post_category = PostCategory.objects.get(id=category)
+                                if post_category:
+                                    if privacy == 'Private' or privacy == 'private':
+                                        post_privacy = 'private'
                                     new_post = BlogPost.objects.create(
                                         post_title=title,
                                         post_content=content,
-                                        post_author=post_author.first(),
-                                        post_category=post_category.first()
+                                        post_author=post_author,
+                                        post_category=post_category,
+                                        post_privacy=post_privacy
                                     )
                                     new_post.save()
                                     data = {'result': 'OK',
+                                            'post-id': new_post.id,
                                             'post-title': title,
                                             'post-content': content,
-                                            'post-author': author,
-                                            'post-category': post_category.first().category_title
+                                            'post-category': post_category.category_title,
+                                            'post-privacy': post_privacy
                                             }
                                     return JsonResponse(data)
                                 else:
