@@ -87,15 +87,15 @@ class RestApi:
                         if (title and content and category and privacy) is not None:
                             post_author = user
                             if post_author:
-                                post_category = PostCategory.objects.get(id=category)
-                                if post_category:
+                                post_category = PostCategory.objects.filter(id=category)
+                                if post_category.first():
                                     if privacy == 'Private' or privacy == 'private':
                                         post_privacy = 'private'
                                     new_post = BlogPost.objects.create(
                                         post_title=title,
                                         post_content=content,
                                         post_author=post_author,
-                                        post_category=post_category,
+                                        post_category=post_category.first(),
                                         post_privacy=post_privacy
                                     )
                                     new_post.save()
@@ -103,7 +103,7 @@ class RestApi:
                                             'post-id': new_post.id,
                                             'post-title': title,
                                             'post-content': content,
-                                            'post-category': post_category.category_title,
+                                            'post-category': post_category.first().category_title,
                                             'post-privacy': post_privacy
                                             }
                                     return JsonResponse(data)
@@ -126,14 +126,14 @@ class RestApi:
                             elif request.GET.get('post_content') is not None:
                                 post.post_content = request.GET.get('post_content')
                                 post.save()
-                            elif request.GET.get('post_author') is not None:
-                                post_author = User.objects.get(username=request.GET.get('post_author'))
-                                post.post_author = post_author
-                                post.save()
                             elif request.GET.get('post_category') is not None:
-                                post_category = PostCategory.objects.get(category_name=request.GET.get('post_category'))
-                                post.post_category = post_category
-                                post.save()
+                                post_category = PostCategory.objects.filter(id=request.GET.get('post_category'))
+                                if post_category.first():
+                                    post.post_category = post_category.first()
+                                    post.save()
+                                else:
+                                    data = {'result': 'insert available category'}
+                                    return JsonResponse(data)
                             else:
                                 data = {'result': 'insert your editing field'}
                                 return JsonResponse(data)
