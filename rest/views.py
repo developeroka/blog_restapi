@@ -19,12 +19,12 @@ class RestApi:
         token_availability = RestApi.check_token_availability(request)
         result = token_availability['result']
         if result is True:
-            available_token = token_availability['available_token']
+            token_id = token_availability['available_token']
             if request.method == 'GET':
-                return RestApi.get(request, available_token)
+                return RestApi.get(request, token_id)
 
             elif request.method == 'POST':
-                return RestApi.post(request, available_token)
+                return RestApi.post(request, token_id)
 
             elif request.method == 'PUT':
                 return RestApi.put(request)
@@ -36,8 +36,9 @@ class RestApi:
         else:
             return JsonResponse({'result': result})
 
-    def get(request, available_token):
+    def get(request, token_id):
         post_id = request.GET.get('post_id')
+        available_token = ApiToken.objects.get(id=token_id)
         if post_id:
             user = available_token.token_user
             post_query = BlogPost.objects.filter(id=post_id)
@@ -88,7 +89,8 @@ class RestApi:
             except Exception as e:
                 return JsonResponse({"Error": str(e)})
 
-    def post(request, available_token):
+    def post(request, token_id):
+        available_token = ApiToken.objects.get(id=token_id)
         user = available_token.token_user
         title = request.POST.get('post_title')
         content = request.POST.get('post_content')
