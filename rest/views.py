@@ -242,10 +242,12 @@ class UserActivity:
             user_form = UserForm(request.POST)
             username = request.POST['username']
             password = request.POST['password']
+            username_checking = Utilities.RegEx.check_username_matching(username)
+            password_checking = Utilities.RegEx.check_password_matching(password)
 
             if user_form.is_valid():
-                if Utilities.RegEx.check_username_matching(username):
-                    if Utilities.RegEx.check_password_matching(password):
+                if username_checking is True:
+                    if password_checking is True:
                         user_form.save()
                         user = User.objects.get(username=username)
                         time_difference = timedelta(minutes=5)
@@ -259,18 +261,14 @@ class UserActivity:
                                          token_expired=expire_date,
                                          token_user=user)
                         token.save()
-                        return JsonResponse(
-                            {'token: ': token.token_content,
+                        return JsonResponse({
+                             'token: ': token.token_content,
                              'expired: ':  token.token_expired,
-                             })
+                        })
                     else:
-                        user_form.add_error('password', 'your username can only include '
-                                                        'A-Z, a-z, 0-9 and /_/-'
-                                                        'and least 6 characters')
+                        user_form.add_error('password', password_checking['Err'])
                 else:
-                    user_form.add_error('username', 'your username can only include '
-                                                    'A-Z, a-z, 0-9 and /_/-'
-                                                    'and least 3 characters')
+                    user_form.add_error('username', username_checking['Err'])
         else:
             user_form = UserForm()
         return shortcuts.render(request, UserActivity._template_register, {
@@ -327,32 +325,27 @@ class Utilities:
             regex = '[A-Za-z0-9@.+_-]{6,}'
             user_password = str(password)
             matching = re.findall(regex, user_password)
-            if matching:
-                matching_len = len(str(matching)) - 4
-                if matching_len == len(user_password):
-                    return True
-                else:
-                    data = {'Err': 'your password can only include '
-                                   'A-Z, a-z, 0-9 and /@/./_/+/-/'}
-                    return data
+            matching_len = len(str(matching)) - 4
+            if matching_len == len(user_password):
+                return True
             else:
-                data = {'Err': 'your password must be at least 6 characters'}
+                data = {'Err': 'your password can only include '
+                               'A-Z, a-z, 0-9 and /@/./_/+/-/'
+                               'and it must be at least 6 characters'
+                        }
                 return data
 
         def check_username_matching(username):
             regex = '[A-Za-z0-9+.@_-]{3,}'
             user_name = str(username)
             matching = re.findall(regex, user_name)
-            if matching:
-                matching_len = len(str(matching)) - 4
-                if matching_len == len(user_name):
-                    return True
-                else:
-                    data = {'Err': 'your username can only include '
-                                   'A-Z, a-z, 0-9 and /@/./_/+/-/'}
-                    return data
+            matching_len = len(str(matching)) - 4
+            if matching_len == len(user_name):
+                return True
             else:
-                data = {'Err': 'your username must be at least 3 characters'}
+                data = {'Err': 'your username can only include '
+                               'A-Z, a-z, 0-9 and /@/./_/+/-/'
+                               'and it must be at least 3 characters'}
                 return data
 
 
