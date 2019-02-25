@@ -1,9 +1,11 @@
+import json
+
 from django.db.models import Q
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest.models import BlogPost, PostCategory, ApiToken
 from django.contrib.auth.models import User
-from django.contrib.auth.tokens import default_token_generator, salted_hmac
+from django.contrib.auth.tokens import salted_hmac
 from rest.forms import UserForm, TokenForm
 from django import shortcuts
 from datetime import datetime, timedelta
@@ -14,43 +16,25 @@ import re
 class RestApi:
     @csrf_exempt
     def api(request):
-        sent_token = request.META.get('HTTP_AUTHORIZATION')
-        if sent_token is not None:
-            req_token = sent_token.split(' ')[1]
-            res_token = ApiToken.objects.filter(token_content=req_token)
-            if res_token.first():
-                available_token = res_token.first()
-                token_expired = available_token.token_expired
-                if datetime.strptime(str(token_expired)[:19], "%Y-%m-%d %H:%M:%S") > datetime.now():
-                    time_difference = timedelta(minutes=5)
-                    token_expired += time_difference
-                    available_token.token_expired = token_expired
-                    available_token.save()
-                    if request.method == 'GET':
-                        return RestApi.get(request, available_token)
+        token_availability = RestApi.check_token_availability(request)
+        result = token_availability['result']
+        if result is True:
+            available_token = token_availability['available_token']
+            if request.method == 'GET':
+                return RestApi.get(request, available_token)
 
-                    elif request.method == 'POST':
-                        return RestApi.post(request, available_token)
+            elif request.method == 'POST':
+                return RestApi.post(request, available_token)
 
-                    elif request.method == 'PUT':
-                        return RestApi.put(request)
+            elif request.method == 'PUT':
+                return RestApi.put(request)
 
-                    elif request.method == 'DELETE':
-                        return RestApi.delete(request)
-                    else:
-                        return JsonResponse({'result': 'you can\'t send this type of request'})
-
-                else:
-                    data = {'Error message:': 'Your token has been expired, '
-                            'you must login again for new access token.'}
-
-                    return JsonResponse(data)
+            elif request.method == 'DELETE':
+                return RestApi.delete(request)
             else:
-                data = {'Error message:': 'not available Token'}
-                return JsonResponse(data)
+                return JsonResponse({'result': 'you can\'t send this type of request'})
         else:
-            data = {'result': 'please send your token with your request'}
-            return JsonResponse(data)
+            return JsonResponse({'result': result})
 
     def get(request, available_token):
         post_id = request.GET.get('post_id')
@@ -196,6 +180,32 @@ class RestApi:
         else:
             data = {'result': 'insert a post id'}
             return JsonResponse(data)
+
+    def check_token_availability(request):
+        sent_token = request.META.get('HTTP_AUTHORIZATION')
+        if sent_token is not None:
+            req_token = sent_token.split(' ')[1]
+            res_token = ApiToken.objects.filter(token_content=req_token)
+            if res_token.first():
+                available_token = res_token.first()
+                token_expired = available_token.token_expired
+                if datetime.strptime(str(token_expired)[:19], "%Y-%m-%d %H:%M:%S") > datetime.now():
+                    time_difference = timedelta(minutes=5)
+                    token_expired += time_difference
+                    available_token.token_expired = token_expired
+                    available_token.save()
+                    data = {'result': True, 'available_token': available_token.id}
+                    return data
+                else:
+                    data = {'result': 'Your token has been expired, '
+                                      'you must login again for new access token.'}
+                    return data
+            else:
+                data = {'result': 'not available Token'}
+                return data
+        else:
+            data = {'result': 'please send your token with your request'}
+            return data
 
 
 class UserActivity:
