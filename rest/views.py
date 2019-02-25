@@ -96,7 +96,7 @@ class RestApi:
     def post(request, token_id):
         available_token = ApiToken.objects.get(id=token_id)
         user = available_token.token_user
-        title = request.POST.get('post_title')
+        title = request.POST.get("post_title")
         content = request.POST.get('post_content')
         category = request.POST.get('post_category')
         privacy = request.POST.get('post_privacy')
@@ -240,10 +240,8 @@ class UserActivity:
 
         if request.method == 'POST':
             user_form = UserForm(request.POST)
-            token_form = TokenForm(request.POST)
             username = request.POST['username']
             password = request.POST['password']
-            client_id = request.POST['token_clientId']
 
             if user_form.is_valid():
                 if Utilities.RegEx.check_username_matching(username):
@@ -256,7 +254,7 @@ class UserActivity:
                         """TODO : check why token/user _form doesn't have
                          cleaned_data without breakpoint but it has with it...!"""
 
-                        my_token = salted_hmac(client_id, user).hexdigest()
+                        my_token = salted_hmac(user).hexdigest()
                         token = ApiToken(token_content=my_token,
                                          token_expired=expire_date,
                                          token_clientId=client_id,
@@ -291,20 +289,21 @@ class UserActivity:
             client_id = request.POST['token_clientId']
             password = request.POST['password']
             username = request.POST['username']
+            password_checking = Utilities.RegEx.check_password_matching(password)
+            username_checking = Utilities.RegEx.check_username_matching(username)
+            if password_checking is True:
 
-            if Utilities.RegEx.check_password_matching(password):
+                if username_checking is True:
+                    user = User.objects.filter(Q(username=username) & Q(password=password))
 
-                if Utilities.RegEx.check_username_matching(username):
-                    user = User.objects.get(Q(username=username) & Q(password=password)) or None
-
-                    if user is not None:
+                    if user.first() is not None:
                         time_difference = timedelta(minutes=5)
                         expire_date = timezone.now() + time_difference
-                        my_token = str(salted_hmac(datetime.now(), user).hexdigest())
+                        my_token = str(salted_hmac(datetime.now(), user.first()).hexdigest())
                         token = ApiToken(token_content=my_token,
                                          token_expired=expire_date,
                                          token_clientId=client_id,
-                                         token_user=user)
+                                         token_user=user.first())
                         token.save()
                         return JsonResponse({'token': token.token_content,
                                              'expired': token.token_expired,
@@ -312,13 +311,9 @@ class UserActivity:
                     else:
                         return JsonResponse({'Error': 'this user is not available'})
                 else:
-                    user_form.add_error('username', 'your username can only include '
-                                                    'A-Z, a-z, 0-9 and /_/-'
-                                                    'and least 3 characters')
+                    user_form.add_error('username', username_checking['Err'])
             else:
-                user_form.add_error('password', 'your password can only include '
-                                                'A-Z, a-z, 0-9 and /@/./_/+/-/'
-                                                'and least 6 characters')
+                user_form.add_error('password', password_checking['Err'])
         else:
             user_form = UserForm
             token_form = TokenForm
@@ -341,9 +336,12 @@ class Utilities:
                 if matching_len == len(user_password):
                     return True
                 else:
-                    return False
+                    data = {'Err': 'your password can only include '
+                                   'A-Z, a-z, 0-9 and /@/./_/+/-/'}
+                    return data
             else:
-                return False
+                data = {'Err': 'your password must be at least 6 characters'}
+                return data
 
         def check_username_matching(username):
             regex = '[A-Za-z0-9+.@_-]{3,}'
@@ -354,10 +352,12 @@ class Utilities:
                 if matching_len == len(user_name):
                     return True
                 else:
-                    return False
+                    data = {'Err': 'your username can only include '
+                                   'A-Z, a-z, 0-9 and /@/./_/+/-/'}
+                    return data
             else:
-                return False
-
+                data = {'Err': 'your username must be at least 3 characters'}
+                return data
 
 
 
