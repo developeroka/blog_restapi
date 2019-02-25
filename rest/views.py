@@ -93,9 +93,6 @@ class RestApi:
                 data = {'Error message:': 'You can\'t request more than 5 items'}
                 return JsonResponse(data)
 
-
-
-
     def post(request, token_id):
         available_token = ApiToken.objects.get(id=token_id)
         user = available_token.token_user
@@ -215,6 +212,23 @@ class RestApi:
         else:
             data = {'result': 'please send your token with your request'}
             return data
+
+    @csrf_exempt
+    def categories(request):
+        if request.method == 'GET':
+            token_availability = RestApi.check_token_availability(request)
+            result = token_availability['result']
+            if result is True:
+                category_query = PostCategory.objects.all()
+                data = [{
+                    'category_title': cat.category_name,
+                    'category_id': cat.id
+                } for cat in category_query]
+                return JsonResponse({'data': data})
+            else:
+                return JsonResponse({'result': result})
+        else:
+            return JsonResponse({'result': 'you can\'t send this type of request'})
 
 
 class UserActivity:
