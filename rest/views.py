@@ -254,16 +254,14 @@ class UserActivity:
                         """TODO : check why token/user _form doesn't have
                          cleaned_data without breakpoint but it has with it...!"""
 
-                        my_token = salted_hmac(user).hexdigest()
+                        my_token = salted_hmac(user, datetime.now()).hexdigest()
                         token = ApiToken(token_content=my_token,
                                          token_expired=expire_date,
-                                         token_clientId=client_id,
                                          token_user=user)
                         token.save()
                         return JsonResponse(
                             {'token: ': token.token_content,
                              'expired: ':  token.token_expired,
-                             'clientId': token.token_clientId
                              })
                     else:
                         user_form.add_error('password', 'your username can only include '
@@ -275,10 +273,8 @@ class UserActivity:
                                                     'and least 3 characters')
         else:
             user_form = UserForm()
-            token_form = TokenForm()
         return shortcuts.render(request, UserActivity._template_register, {
             'user_form': user_form,
-            'token_form': token_form
         })
 
     def login(request):
