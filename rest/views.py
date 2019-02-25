@@ -27,151 +27,174 @@ class RestApi:
                     available_token.token_expired = token_expired
                     available_token.save()
                     if request.method == 'GET':
-                        post_id = request.GET.get('post_id')
-                        if post_id:
-                            user = available_token.token_user
-                            post_query = BlogPost.objects.filter(id=post_id)
-                            if post_query.first():
-                                if post_query.first().post_author == user or \
-                                        post_query.first().post_privacy == 'public':
-                                    data = {'post_title': post_query.first().post_title,
-                                            'post_content': post_query.first().post_content,
-                                            'post_id': post_query.first().id,
-                                            'post_author': post_query.first().post_author.username,
-                                            'post_category': post_query.first().post_category.category_name,
-                                            'post_privacy': post_query.first().post_privacy
-                                            }
-                                    response = JsonResponse(data)
-                                    return response
-                                else:
-                                    data = {'Error message:': 'you\'re not able to see this post'}
-                                    return JsonResponse(data)
-                            else:
-                                data = {'Error message:': 'this post is not valid'}
-                                return JsonResponse(data)
-                        else:
-                            try:
-                                first_item = request.GET.get('first_item')
-                                last_item = request.GET.get('last_item')
-                                first_numb = int(first_item)
-                                last_numb = int(last_item)
-                                item_delta = last_numb - first_numb
+                        return RestApi.get(request, available_token)
 
-                                if item_delta < 5:
-                                    user = available_token.token_user
-                                    post_query = BlogPost.objects.filter(
-                                        Q(post_privacy='public') |
-                                        Q(post_author=user)
-                                    )[first_numb:last_numb]
-                                    data = [{'post_title': a.post_title,
-                                             'post_content': a.post_content,
-                                             'post_author': a.post_author.username,
-                                             'post_id': a.pk,
-                                             'post_privacy': str(a.post_privacy),
-                                             'post_category': a.post_category.category_name
-                                             } for a in post_query]
-                                    return JsonResponse({'data': data})
-                                else:
-                                    data = {'Error message:': 'You can\'t request more than 5 items'}
-                                    return JsonResponse(data)
-
-                            except Exception as e:
-                                return JsonResponse({"Error": str(e)})
                     elif request.method == 'POST':
-                        user = available_token.token_user
-                        title = request.POST.get('post_title')
-                        content = request.POST.get('post_content')
-                        category = request.POST.get('post_category')
-                        privacy = request.POST.get('post_privacy')
-                        post_privacy = 'public'
-                        if (title and content and category and privacy) is not None:
-                            post_author = user
-                            if post_author:
-                                post_category = PostCategory.objects.filter(id=category)
-                                if post_category.first():
-                                    if privacy == 'Private' or privacy == 'private':
-                                        post_privacy = 'private'
-                                    new_post = BlogPost.objects.create(
-                                        post_title=title,
-                                        post_content=content,
-                                        post_author=post_author,
-                                        post_category=post_category.first(),
-                                        post_privacy=post_privacy
-                                    )
-                                    new_post.save()
-                                    data = {'result': 'OK',
-                                            'post-id': new_post.id,
-                                            'post-title': title,
-                                            'post-content': content,
-                                            'post-category': post_category.first().category_title,
-                                            'post-privacy': post_privacy
-                                            }
-                                    return JsonResponse(data)
-                                else:
-                                    data = {'result': 'insert a valid category(id)'}
-                                    return JsonResponse(data)
-                            else:
-                                data = {'result': 'insert a valid author(user)'}
-                                return JsonResponse(data)
-                        else:
-                            data = {'result': 'insert title, content, author and category id of the post'}
-                            return JsonResponse(data)
-                    elif request.method == 'PUT':
-                        post_id = request.GET.get('post_id')
-                        if post_id:
-                            post = BlogPost.objects.filter(id=post_id)
-                            if post.first():
-                                if request.GET.get('post_title') is not None:
-                                    post.post_title = request.GET.get('post_title')
-                                    post.save()
-                                elif request.GET.get('post_content') is not None:
-                                    post.post_content = request.GET.get('post_content')
-                                    post.save()
-                                elif request.GET.get('post_category') is not None:
-                                    post_category = PostCategory.objects.filter(id=request.GET.get('post_category'))
-                                    if post_category.first():
-                                        post.post_category = post_category.first()
-                                        post.save()
-                                    else:
-                                        data = {'result': 'insert available category'}
-                                        return JsonResponse(data)
-                                else:
-                                    data = {'result': 'insert your editing field'}
-                                    return JsonResponse(data)
+                        return RestApi.post(request, available_token)
 
-                                data = {'result': 'The \' ' + str(post.id) + '-' + post.post_title + '\' ' +
-                                        'post has been changed successfully. '}
-                                return JsonResponse(data)
-                            else:
-                                data = {'result': 'Insert a valid post id!'}
-                                return JsonResponse(data)
-                        else:
-                            data = {'result': 'insert a valid post id'}
-                            return JsonResponse(data)
+                    elif request.method == 'PUT':
+                        return RestApi.put(request)
+
                     elif request.method == 'DELETE':
-                        post_id = request.GET.get('post_id')
-                        if post_id:
-                            post = BlogPost.objects.filter(id=post_id).first()
-                            if post:
-                                deleted_id = post.id
-                                post.delete()
-                                data = {'result': 'The \' ' + str(deleted_id) + ' \'' +
-                                        ' post has been deleted successfully. '}
-                                return JsonResponse(data)
-                            else:
-                                data = {'result': 'insert a valid post id'}
-                                return JsonResponse(data)
-                        else:
-                            data = {'result': 'insert a post id'}
-                            return JsonResponse(data)
+                        return RestApi.delete(request)
+                    else:
+                        return JsonResponse({'result': 'you can\'t send this type of request'})
+
                 else:
-                    data = {'Error message:': 'Your token has been expired, you must login again for new access token.'}
+                    data = {'Error message:': 'Your token has been expired, '
+                            'you must login again for new access token.'}
+
                     return JsonResponse(data)
             else:
                 data = {'Error message:': 'not available Token'}
                 return JsonResponse(data)
         else:
             data = {'result': 'please send your token with your request'}
+            return JsonResponse(data)
+
+    def get(request, available_token):
+        post_id = request.GET.get('post_id')
+        if post_id:
+            user = available_token.token_user
+            post_query = BlogPost.objects.filter(id=post_id)
+            if post_query.first():
+                if post_query.first().post_author == user or \
+                        post_query.first().post_privacy == 'public':
+                    data = {'post_title': post_query.first().post_title,
+                            'post_content': post_query.first().post_content,
+                            'post_id': post_query.first().id,
+                            'post_author': post_query.first().post_author.username,
+                            'post_category': post_query.first().post_category.category_name,
+                            'post_privacy': post_query.first().post_privacy
+                            }
+                    response = JsonResponse(data)
+                    return response
+                else:
+                    data = {'Error message:': 'you\'re not able to see this post'}
+                    return JsonResponse(data)
+            else:
+                data = {'Error message:': 'this post is not valid'}
+                return JsonResponse(data)
+        else:
+            try:
+                first_item = request.GET.get('first_item')
+                last_item = request.GET.get('last_item')
+                first_numb = int(first_item)
+                last_numb = int(last_item)
+                item_delta = last_numb - first_numb
+
+                if item_delta < 5:
+                    user = available_token.token_user
+                    post_query = BlogPost.objects.filter(
+                        Q(post_privacy='public') |
+                        Q(post_author=user)
+                    )[first_numb:last_numb]
+                    data = [{'post_title': a.post_title,
+                             'post_content': a.post_content,
+                             'post_author': a.post_author.username,
+                             'post_id': a.pk,
+                             'post_privacy': str(a.post_privacy),
+                             'post_category': a.post_category.category_name
+                             } for a in post_query]
+                    return JsonResponse({'data': data})
+                else:
+                    data = {'Error message:': 'You can\'t request more than 5 items'}
+                    return JsonResponse(data)
+
+            except Exception as e:
+                return JsonResponse({"Error": str(e)})
+
+    def post(request, available_token):
+        user = available_token.token_user
+        title = request.POST.get('post_title')
+        content = request.POST.get('post_content')
+        category = request.POST.get('post_category')
+        privacy = request.POST.get('post_privacy')
+        post_privacy = 'public'
+        if (title and content and category and privacy) is not None:
+            post_author = user
+            if post_author:
+                post_category = PostCategory.objects.filter(id=category)
+                if post_category.first():
+                    if privacy == 'Private' or privacy == 'private':
+                        post_privacy = 'private'
+                    new_post = BlogPost.objects.create(
+                        post_title=title,
+                        post_content=content,
+                        post_author=post_author,
+                        post_category=post_category.first(),
+                        post_privacy=post_privacy
+                    )
+                    new_post.save()
+                    data = {'result': 'OK',
+                            'post-id': new_post.id,
+                            'post-title': title,
+                            'post-content': content,
+                            'post-category': post_category.first().category_title,
+                            'post-privacy': post_privacy
+                            }
+                    return JsonResponse(data)
+                else:
+                    data = {'result': 'insert a valid category(id)'}
+                    return JsonResponse(data)
+            else:
+                data = {'result': 'insert a valid author(user)'}
+                return JsonResponse(data)
+        else:
+            data = {'result': 'insert title, content, author and category id of the post'}
+            return JsonResponse(data)
+
+    def put(request):
+        post_id = request.GET.get('post_id')
+        if post_id:
+            post = BlogPost.objects.filter(id=post_id)
+            if post.first():
+                current_post = BlogPost.objects.get(id=post_id)
+                if request.GET.get('post_title') is not None:
+                    current_post.post_title = request.GET.get('post_title')
+                    current_post.save()
+
+                elif request.GET.get('post_content') is not None:
+                    current_post.post_content = request.GET.get('post_content')
+                    current_post.save()
+
+                elif request.GET.get('post_category') is not None:
+                    post_category = PostCategory.objects.filter(id=request.GET.get('post_category'))
+                    if post_category.first():
+                        current_post.post_category = post_category.first()
+                        current_post.save()
+                    else:
+                        data = {'result': 'insert available category'}
+                        return JsonResponse(data)
+                else:
+                    data = {'result': 'insert your editing field'}
+                    return JsonResponse(data)
+
+                data = {'result': 'The \' ' + str(current_post.id) + '-' + current_post.post_title + '\' ' +
+                                  'post has been changed successfully. '}
+                return JsonResponse(data)
+            else:
+                data = {'result': 'Insert a valid post id!'}
+                return JsonResponse(data)
+        else:
+            data = {'result': 'insert a valid post id'}
+            return JsonResponse(data)
+
+    def delete(request):
+        post_id = request.GET.get('post_id')
+        if post_id:
+            post = BlogPost.objects.filter(id=post_id).first()
+            if post:
+                deleted_id = post.id
+                post.delete()
+                data = {'result': 'The \' ' + str(deleted_id) + ' \'' +
+                                  ' post has been deleted successfully. '}
+                return JsonResponse(data)
+            else:
+                data = {'result': 'insert a valid post id'}
+                return JsonResponse(data)
+        else:
+            data = {'result': 'insert a post id'}
             return JsonResponse(data)
 
 
