@@ -61,33 +61,40 @@ class RestApi:
                 data = {'Error message:': 'this post is not valid'}
                 return JsonResponse(data)
         else:
-            try:
-                first_item = request.GET.get('first_item')
-                last_item = request.GET.get('last_item')
-                first_numb = int(first_item)
-                last_numb = int(last_item)
-                item_delta = last_numb - first_numb
+            first_item = request.GET.get('first_item') or None
+            last_item = request.GET.get('last_item') or None
+            if first_item and last_item:
+                try:
+                    first_numb = int(first_item)
+                    last_numb = int(last_item)
 
-                if item_delta < 5:
-                    user = available_token.token_user
-                    post_query = BlogPost.objects.filter(
-                        Q(post_privacy='public') |
-                        Q(post_author=user)
-                    )[first_numb:last_numb]
-                    data = [{'post_title': a.post_title,
-                             'post_content': a.post_content,
-                             'post_author': a.post_author.username,
-                             'post_id': a.pk,
-                             'post_privacy': str(a.post_privacy),
-                             'post_category': a.post_category.category_name
-                             } for a in post_query]
-                    return JsonResponse({'data': data})
-                else:
-                    data = {'Error message:': 'You can\'t request more than 5 items'}
-                    return JsonResponse(data)
+                except Exception as e:
+                    return JsonResponse({'result': str(e)})
+            else:
+                first_numb = 1
+                last_numb = 5
 
-            except Exception as e:
-                return JsonResponse({"Error": str(e)})
+            item_delta = last_numb - first_numb
+            if item_delta < 5:
+                user = available_token.token_user
+                post_query = BlogPost.objects.filter(
+                    Q(post_privacy='public') |
+                    Q(post_author=user)
+                )[first_numb:last_numb]
+                data = [{'post_title': a.post_title,
+                         'post_content': a.post_content,
+                         'post_author': a.post_author.username,
+                         'post_id': a.pk,
+                         'post_privacy': str(a.post_privacy),
+                         'post_category': a.post_category.category_name
+                         } for a in post_query]
+                return JsonResponse({'data': data})
+            else:
+                data = {'Error message:': 'You can\'t request more than 5 items'}
+                return JsonResponse(data)
+
+
+
 
     def post(request, token_id):
         available_token = ApiToken.objects.get(id=token_id)

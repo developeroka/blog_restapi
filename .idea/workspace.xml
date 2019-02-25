@@ -41,14 +41,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
+            <state relative-caret-position="80">
+              <caret line="65" column="15" lean-forward="true" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1284#3775#0" />
-                <element signature="e#3825#5634#0" />
-                <element signature="e#5666#7306#0" />
-                <element signature="e#7341#7959#0" />
               </folding>
             </state>
           </provider>
@@ -84,7 +80,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/views/decorators/csrf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
+            <state relative-caret-position="242">
               <caret line="53" selection-start-line="53" selection-end-line="53" />
             </state>
           </provider>
@@ -111,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="157" selection-start-line="157" selection-end-line="157" />
+            <state relative-caret-position="155">
+              <caret line="125" selection-start-line="125" selection-end-line="125" />
             </state>
           </provider>
         </entry>
@@ -120,8 +116,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="33" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="171">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
             </state>
           </provider>
         </entry>
@@ -129,8 +125,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/utils/deprecation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="376">
-              <caret line="92" selection-start-line="92" selection-end-line="92" />
+            <state relative-caret-position="272">
+              <caret line="93" selection-start-line="93" selection-end-line="93" />
             </state>
           </provider>
         </entry>
@@ -197,7 +193,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,6 +222,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -435,7 +431,8 @@
       <workItem from="1551085483970" duration="1798000" />
       <workItem from="1551087309809" duration="1789000" />
       <workItem from="1551089181676" duration="1875000" />
-      <workItem from="1551092006374" duration="517000" />
+      <workItem from="1551092006374" duration="1789000" />
+      <workItem from="1551093834207" duration="1202000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -605,11 +602,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551085779355</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="the code is more clear now">
+      <created>1551092574352</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1551092574352</updated>
+    </task>
+    <task id="LOCAL-00026" summary="available_token identity has changed">
+      <created>1551093244592</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1551093244592</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="243001000" />
+    <option name="totallyTimeSpent" value="245475000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -624,13 +635,13 @@
     <frame x="0" y="-1" width="1366" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15378788" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1560606" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3273906" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772727" weight="0.3241491" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7219697" visible="true" weight="0.115072936" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.7219697" visible="true" weight="0.30794165" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6606061" weight="0.38249594" />
@@ -677,7 +688,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/blog_restapi" />
     </ignored-roots>
-    <MESSAGE value="password validation has been done" />
     <MESSAGE value="nullability in ApiToken model has been correct" />
     <MESSAGE value="migrations of nullability in ApiToken model has been added" />
     <MESSAGE value="get categories by id in post request" />
@@ -701,18 +711,9 @@
     <MESSAGE value="check availability of receive objects" />
     <MESSAGE value="check availability of post in PUT req" />
     <MESSAGE value="separate request checking from def api" />
-    <option name="LAST_COMMIT_MESSAGE" value="separate request checking from def api" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/rest/views.py</url>
-          <line>20</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="the code is more clear now" />
+    <MESSAGE value="available_token identity has changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="available_token identity has changed" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/contrib/gis/db/backends/base/models.py">
@@ -1037,6 +1038,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/middleware/clickjacking.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/fields/related.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12705">
@@ -1046,49 +1054,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="157" selection-start-line="157" selection-end-line="157" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/views/decorators/csrf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/middleware/clickjacking.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/utils/deprecation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="92" selection-start-line="92" selection-end-line="92" />
+        <state relative-caret-position="155">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="171">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/utils/deprecation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/views/decorators/csrf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
+        <state relative-caret-position="80">
+          <caret line="65" column="15" lean-forward="true" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1284#3775#0" />
-            <element signature="e#3825#5634#0" />
-            <element signature="e#5666#7306#0" />
-            <element signature="e#7341#7959#0" />
           </folding>
         </state>
       </provider>
