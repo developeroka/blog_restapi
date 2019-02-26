@@ -18,6 +18,7 @@ class RestApi:
     def api(request):
         token_availability = RestApi.check_token_availability(request)
         result = token_availability['result']
+        status = token_availability['status']
         if result is True:
             token_id = token_availability['available_token']
             if request.method == 'GET':
@@ -34,7 +35,7 @@ class RestApi:
             else:
                 return JsonResponse({'result': 'you can\'t send this type of request'})
         else:
-            return JsonResponse({'result': result})
+            return JsonResponse({'result': result}, status=status)
 
     def get(request, token_id):
         post_id = request.GET.get('post_id')
@@ -52,14 +53,14 @@ class RestApi:
                             'post_category': post_query.first().post_category.category_name,
                             'post_privacy': post_query.first().post_privacy
                             }
-                    response = JsonResponse(data)
+                    response = JsonResponse(data, status=200)
                     return response
                 else:
                     data = {'Error message:': 'you\'re not able to see this post'}
-                    return JsonResponse(data)
+                    return JsonResponse(data, status=403)
             else:
                 data = {'Error message:': 'this post is not valid'}
-                return JsonResponse(data)
+                return JsonResponse(data, status=404)
         else:
             first_item = request.GET.get('first_item') or None
             last_item = request.GET.get('last_item') or None
@@ -69,7 +70,7 @@ class RestApi:
                     last_numb = int(last_item)
 
                 except Exception as e:
-                    return JsonResponse({'result': str(e)})
+                    return JsonResponse({'result': str(e)}, status=400)
             else:
                 first_numb = 1
                 last_numb = 5
@@ -88,10 +89,10 @@ class RestApi:
                          'post_privacy': str(a.post_privacy),
                          'post_category': a.post_category.category_name
                          } for a in post_query]
-                return JsonResponse({'data': data})
+                return JsonResponse({'data': data}, status=200)
             else:
                 data = {'Error message:': 'You can\'t request more than 5 items'}
-                return JsonResponse(data)
+                return JsonResponse(data, status=400)
 
     def post(request, token_id):
         available_token = ApiToken.objects.get(id=token_id)
@@ -202,17 +203,17 @@ class RestApi:
                     token_expired += time_difference
                     available_token.token_expired = token_expired
                     available_token.save()
-                    data = {'result': True, 'available_token': available_token.id}
+                    data = {'result': True, 'available_token': available_token.id, 'status': 200}
                     return data
                 else:
                     data = {'result': 'Your token has been expired, '
-                                      'you must login again for new access token.'}
+                                      'you must login again for new access token.', 'status': 400}
                     return data
             else:
-                data = {'result': 'not available Token'}
+                data = {'result': 'not available Token', 'status': 404}
                 return data
         else:
-            data = {'result': 'please send your token with your request'}
+            data = {'result': 'please send your token with your request', 'status': 401}
             return data
 
     @csrf_exempt
