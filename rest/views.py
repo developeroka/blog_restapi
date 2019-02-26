@@ -182,13 +182,13 @@ class RestApi:
                 post.delete()
                 data = {'result': 'The \' ' + str(deleted_id) + ' \'' +
                                   ' post has been deleted successfully. '}
-                return JsonResponse(data)
+                return JsonResponse(data, status=200)
             else:
                 data = {'result': 'insert a valid post id'}
-                return JsonResponse(data)
+                return JsonResponse(data, status=404)
         else:
             data = {'result': 'insert a post id'}
-            return JsonResponse(data)
+            return JsonResponse(data, status=400)
 
     def check_token_availability(request):
         sent_token = request.META.get('HTTP_AUTHORIZATION')
