@@ -40,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="146">
-              <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
+            <state relative-caret-position="266">
+              <caret line="173" column="48" selection-start-line="173" selection-start-column="48" selection-end-line="173" selection-end-column="48" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
                 <element signature="e#1290#3918#0" />
@@ -58,12 +58,20 @@
                 <element signature="e#3112#3776#0" />
                 <element signature="e#3351#3703#0" />
                 <element signature="e#3811#3918#0" />
+                <element signature="e#3961#5874#0" />
+                <element signature="e#4414#5731#0" />
+                <element signature="e#4477#5606#0" />
                 <element signature="e#4596#5469#0" />
                 <element signature="e#5083#5423#0" />
                 <element signature="e#5512#5606#0" />
                 <element signature="e#5641#5731#0" />
                 <element signature="e#5758#5874#0" />
-                <element signature="e#5906#7546#0" />
+                <element signature="e#6063#7317#0" />
+                <element signature="e#6193#6288#0" />
+                <element signature="e#6376#6475#0" />
+                <element signature="e#6564#6956#0" />
+                <element signature="e#6999#7091#0" />
+                <element signature="e#7116#7275#0" />
                 <element signature="e#7581#8199#0" />
                 <element signature="e#8252#9468#0" />
                 <element signature="e#10189#14079#0" />
@@ -470,7 +478,7 @@
       <workItem from="1551126182794" duration="1023000" />
       <workItem from="1551164370670" duration="648000" />
       <workItem from="1551168799093" duration="1626000" />
-      <workItem from="1551171455033" duration="1068000" />
+      <workItem from="1551171455033" duration="1186000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -703,11 +711,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551172462288</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="'put' responses status set">
+      <created>1551172549601</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1551172549601</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255707000" />
+    <option name="totallyTimeSpent" value="255825000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -775,7 +790,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/blog_restapi" />
     </ignored-roots>
-    <MESSAGE value="user added to token model" />
     <MESSAGE value="nullable fields change to non-nullable in models" />
     <MESSAGE value="clientIds change to user" />
     <MESSAGE value="token expiration datetime has changed to timezone" />
@@ -800,7 +814,8 @@
     <MESSAGE value="regex now response correctly" />
     <MESSAGE value="receive data of post from body of request" />
     <MESSAGE value="'get' status responses set" />
-    <option name="LAST_COMMIT_MESSAGE" value="'get' status responses set" />
+    <MESSAGE value="'put' responses status set" />
+    <option name="LAST_COMMIT_MESSAGE" value="'put' responses status set" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/contrib/gis/db/backends/base/models.py">
@@ -1101,8 +1116,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
+        <state relative-caret-position="266">
+          <caret line="173" column="48" selection-start-line="173" selection-start-column="48" selection-end-line="173" selection-end-column="48" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <element signature="e#1290#3918#0" />
@@ -1119,12 +1134,20 @@
             <element signature="e#3112#3776#0" />
             <element signature="e#3351#3703#0" />
             <element signature="e#3811#3918#0" />
+            <element signature="e#3961#5874#0" />
+            <element signature="e#4414#5731#0" />
+            <element signature="e#4477#5606#0" />
             <element signature="e#4596#5469#0" />
             <element signature="e#5083#5423#0" />
             <element signature="e#5512#5606#0" />
             <element signature="e#5641#5731#0" />
             <element signature="e#5758#5874#0" />
-            <element signature="e#5906#7546#0" />
+            <element signature="e#6063#7317#0" />
+            <element signature="e#6193#6288#0" />
+            <element signature="e#6376#6475#0" />
+            <element signature="e#6564#6956#0" />
+            <element signature="e#6999#7091#0" />
+            <element signature="e#7116#7275#0" />
             <element signature="e#7581#8199#0" />
             <element signature="e#8252#9468#0" />
             <element signature="e#10189#14079#0" />

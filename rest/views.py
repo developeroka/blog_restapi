@@ -161,17 +161,17 @@ class RestApi:
                         return JsonResponse(data)
                 else:
                     data = {'result': 'insert your editing field'}
-                    return JsonResponse(data)
+                    return JsonResponse(data, status=400)
 
                 data = {'result': 'The \' ' + str(current_post.id) + '-' + current_post.post_title + '\' ' +
                                   'post has been changed successfully. '}
-                return JsonResponse(data)
+                return JsonResponse(data, status=200)
             else:
                 data = {'result': 'Insert a valid post id!'}
-                return JsonResponse(data)
+                return JsonResponse(data, status=404)
         else:
-            data = {'result': 'insert a valid post id'}
-            return JsonResponse(data)
+            data = {'result': 'insert a post id'}
+            return JsonResponse(data, status=400)
 
     def delete(request):
         post_id = request.GET.get('post_id')
