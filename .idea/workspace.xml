@@ -40,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
-              <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+            <state relative-caret-position="146">
+              <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
                 <element signature="e#1290#3918#0" />
@@ -58,10 +58,18 @@
                 <element signature="e#3112#3776#0" />
                 <element signature="e#3351#3703#0" />
                 <element signature="e#3811#3918#0" />
-                <element signature="e#3961#5874#0" />
+                <element signature="e#4596#5469#0" />
+                <element signature="e#5083#5423#0" />
+                <element signature="e#5512#5606#0" />
+                <element signature="e#5641#5731#0" />
+                <element signature="e#5758#5874#0" />
                 <element signature="e#5906#7546#0" />
                 <element signature="e#7581#8199#0" />
                 <element signature="e#8252#9468#0" />
+                <element signature="e#10189#14079#0" />
+                <element signature="e#10308#12065#0" />
+                <element signature="e#12100#14079#0" />
+                <element signature="e#14104#15255#0" />
               </folding>
             </state>
           </provider>
@@ -462,7 +470,7 @@
       <workItem from="1551126182794" duration="1023000" />
       <workItem from="1551164370670" duration="648000" />
       <workItem from="1551168799093" duration="1626000" />
-      <workItem from="1551171455033" duration="825000" />
+      <workItem from="1551171455033" duration="1068000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -688,11 +696,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551169830584</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="'get' status responses set">
+      <created>1551172462288</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1551172462288</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255464000" />
+    <option name="totallyTimeSpent" value="255707000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -713,7 +728,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3273906" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772727" weight="0.3241491" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.73636365" visible="true" weight="0.36628848" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.73636365" visible="true" weight="0.16531605" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6606061" weight="0.38249594" />
@@ -760,7 +775,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/blog_restapi" />
     </ignored-roots>
-    <MESSAGE value="uploading views.py again" />
     <MESSAGE value="user added to token model" />
     <MESSAGE value="nullable fields change to non-nullable in models" />
     <MESSAGE value="clientIds change to user" />
@@ -785,18 +799,8 @@
     <MESSAGE value="remove token_clientId from register form" />
     <MESSAGE value="regex now response correctly" />
     <MESSAGE value="receive data of post from body of request" />
-    <option name="LAST_COMMIT_MESSAGE" value="receive data of post from body of request" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/rest/views.py</url>
-          <line>282</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="'get' status responses set" />
+    <option name="LAST_COMMIT_MESSAGE" value="'get' status responses set" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/contrib/gis/db/backends/base/models.py">
@@ -1097,8 +1101,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
+        <state relative-caret-position="146">
+          <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <element signature="e#1290#3918#0" />
@@ -1115,10 +1119,18 @@
             <element signature="e#3112#3776#0" />
             <element signature="e#3351#3703#0" />
             <element signature="e#3811#3918#0" />
-            <element signature="e#3961#5874#0" />
+            <element signature="e#4596#5469#0" />
+            <element signature="e#5083#5423#0" />
+            <element signature="e#5512#5606#0" />
+            <element signature="e#5641#5731#0" />
+            <element signature="e#5758#5874#0" />
             <element signature="e#5906#7546#0" />
             <element signature="e#7581#8199#0" />
             <element signature="e#8252#9468#0" />
+            <element signature="e#10189#14079#0" />
+            <element signature="e#10308#12065#0" />
+            <element signature="e#12100#14079#0" />
+            <element signature="e#14104#15255#0" />
           </folding>
         </state>
       </provider>

@@ -126,16 +126,16 @@ class RestApi:
                             'post-category': post_category.first().category_title,
                             'post-privacy': post_privacy
                             }
-                    return JsonResponse(data)
+                    return JsonResponse(data, status=200)
                 else:
                     data = {'result': 'insert a valid category(id)'}
-                    return JsonResponse(data)
+                    return JsonResponse(data, status=404)
             else:
                 data = {'result': 'insert a valid author(user)'}
-                return JsonResponse(data)
+                return JsonResponse(data, status=404)
         else:
             data = {'result': 'insert title, content, author and category id of the post'}
-            return JsonResponse(data)
+            return JsonResponse(data, status=400)
 
     def put(request):
         post_id = request.GET.get('post_id')
