@@ -96,10 +96,12 @@ class RestApi:
     def post(request, token_id):
         available_token = ApiToken.objects.get(id=token_id)
         user = available_token.token_user
-        title = request.POST.get("post_title")
-        content = request.POST.get('post_content')
-        category = request.POST.get('post_category')
-        privacy = request.POST.get('post_privacy')
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        title = body['post_title']
+        content = body['post_content']
+        category = body['post_category']
+        privacy = body['post_privacy']
         post_privacy = 'public'
         if (title and content and category and privacy) is not None:
             post_author = user
@@ -285,9 +287,9 @@ class UserActivity:
             username = request.POST['username']
             password_checking = Utilities.RegEx.check_password_matching(password)
             username_checking = Utilities.RegEx.check_username_matching(username)
-            if password_checking is True:
+            if username_checking is True:
 
-                if username_checking is True:
+                if password_checking is True:
                     user = User.objects.filter(Q(username=username) & Q(password=password))
 
                     if user.first() is not None:
@@ -305,12 +307,12 @@ class UserActivity:
                     else:
                         return JsonResponse({'Error': 'this user is not available'})
                 else:
-                    user_form.add_error('username', username_checking['Err'])
+                    user_form.add_error('password', password_checking['Err'])
             else:
-                user_form.add_error('password', password_checking['Err'])
+                user_form.add_error('username', username_checking['Err'])
         else:
-            user_form = UserForm
-            token_form = TokenForm
+            user_form = UserForm()
+            token_form = TokenForm()
         return shortcuts.render(request, UserActivity._template_login, {
             'user_form': user_form,
             'token_form': token_form
