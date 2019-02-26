@@ -1,5 +1,4 @@
 import json
-
 from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -33,7 +32,7 @@ class RestApi:
             elif request.method == 'DELETE':
                 return RestApi.delete(request)
             else:
-                return JsonResponse({'result': 'you can\'t send this type of request'})
+                return JsonResponse({'result': 'you can\'t send this type of request'}, status=400)
         else:
             return JsonResponse({'result': result}, status=status)
 
@@ -221,17 +220,18 @@ class RestApi:
         if request.method == 'GET':
             token_availability = RestApi.check_token_availability(request)
             result = token_availability['result']
+            status = token_availability['status']
             if result is True:
                 category_query = PostCategory.objects.all()
                 data = [{
                     'category_title': cat.category_name,
                     'category_id': cat.id
                 } for cat in category_query]
-                return JsonResponse({'data': data})
+                return JsonResponse({'data': data}, status=200)
             else:
-                return JsonResponse({'result': result})
+                return JsonResponse({'result': result}, status=status)
         else:
-            return JsonResponse({'result': 'you can\'t send this type of request'})
+            return JsonResponse({'result': 'you can\'t send this type of request'}, status=400)
 
 
 class UserActivity:
