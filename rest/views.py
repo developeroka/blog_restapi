@@ -91,17 +91,17 @@ class RestApi:
                 return JsonResponse({'data': data}, status=200)
             else:
                 data = {'Error message:': 'You can\'t request more than 5 items'}
-                return JsonResponse(data, status=400)
+                return JsonResponse(data, status=416)
 
     def post(request, token_id):
         available_token = ApiToken.objects.get(id=token_id)
         user = available_token.token_user
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
-        title = body['post_title']
-        content = body['post_content']
-        category = body['post_category']
-        privacy = body['post_privacy']
+        title = body.get('post_title')
+        content = body.get('post_content')
+        category = body.get('post_category')
+        privacy = body.get('post_privacy')
         post_privacy = 'public'
         if (title and content and category and privacy) is not None:
             post_author = user
@@ -130,35 +130,38 @@ class RestApi:
                     data = {'result': 'insert a valid category(id)'}
                     return JsonResponse(data, status=404)
             else:
-                data = {'result': 'insert a valid author(user)'}
-                return JsonResponse(data, status=404)
+                data = {'result': 'you are not a valid author(user)'}
+                return JsonResponse(data, status=403)
         else:
             data = {'result': 'insert title, content, author and category id of the post'}
             return JsonResponse(data, status=400)
 
     def put(request):
-        post_id = request.GET.get('post_id')
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        post_id = body.get('post_id')
+        title = body.get('post_title')
+        content = body.get('post_content')
+        category = body.get('post_category')
         if post_id:
             post = BlogPost.objects.filter(id=post_id)
             if post.first():
                 current_post = BlogPost.objects.get(id=post_id)
-                if request.GET.get('post_title') is not None:
-                    current_post.post_title = request.GET.get('post_title')
+                if title is not None:
+                    current_post.post_title = title
                     current_post.save()
-
-                elif request.GET.get('post_content') is not None:
-                    current_post.post_content = request.GET.get('post_content')
+                if content is not None:
+                    current_post.post_content = content
                     current_post.save()
-
-                elif request.GET.get('post_category') is not None:
-                    post_category = PostCategory.objects.filter(id=request.GET.get('post_category'))
+                if category is not None:
+                    post_category = PostCategory.objects.filter(id=category)
                     if post_category.first():
                         current_post.post_category = post_category.first()
                         current_post.save()
                     else:
                         data = {'result': 'insert available category'}
-                        return JsonResponse(data)
-                else:
+                        return JsonResponse(data, status=40)
+                elif title and category and content is None:
                     data = {'result': 'insert your editing field'}
                     return JsonResponse(data, status=400)
 
@@ -239,19 +242,23 @@ class UserActivity:
     _template_login = 'rest/login.html'
     _template_register = 'rest/register.html'
 
+    @csrf_exempt
     def register(request):
 
         if request.method == 'POST':
-            user_form = UserForm(request.POST)
-            username = request.POST['username']
-            password = request.POST['password']
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+            username = body.get('username')
+            password = body.get('password')
             username_checking = Utilities.RegEx.check_username_matching(username)
             password_checking = Utilities.RegEx.check_password_matching(password)
 
-            if user_form.is_valid():
-                if username_checking is True:
-                    if password_checking is True:
-                        user_form.save()
+            if username_checking is True:
+                if password_checking is True:
+                    receive_username = User.objects.all().filter(Q(username=username)).first()
+                    if receive_username is None:
+                        new_user = User(username=username, password=password)
+                        new_user.save()
                         user = User.objects.get(username=username)
                         time_difference = timedelta(minutes=5)
                         expire_date = timezone.now() + time_difference
@@ -267,57 +274,55 @@ class UserActivity:
                         return JsonResponse({
                              'token: ': token.token_content,
                              'expired: ':  token.token_expired,
-                        })
+                        }, status=200)
                     else:
-                        user_form.add_error('password', password_checking['Err'])
+                        return JsonResponse({'result': 'username is already exists'}, status=400)
                 else:
-                    user_form.add_error('username', username_checking['Err'])
-        else:
-            user_form = UserForm()
-        return shortcuts.render(request, UserActivity._template_register, {
-            'user_form': user_form,
-        })
+                    return JsonResponse({'result': password_checking['Err']}, status=400)
+            else:
+                return JsonResponse({'result': username_checking['Err']}, status=400)
 
+        else:
+            return JsonResponse({'result': 'You can\'t send this type of request'}, status=403)
+
+    @csrf_exempt
     def login(request):
 
         if request.method == 'POST':
-            user_form = UserForm(request.POST)
-            token_form = TokenForm(request.POST)
-            client_id = request.POST['token_clientId']
-            password = request.POST['password']
-            username = request.POST['username']
-            password_checking = Utilities.RegEx.check_password_matching(password)
-            username_checking = Utilities.RegEx.check_username_matching(username)
-            if username_checking is True:
-
-                if password_checking is True:
-                    user = User.objects.filter(Q(username=username) & Q(password=password))
-
-                    if user.first() is not None:
-                        time_difference = timedelta(minutes=5)
-                        expire_date = timezone.now() + time_difference
-                        my_token = str(salted_hmac(datetime.now(), user.first()).hexdigest())
-                        token = ApiToken(token_content=my_token,
-                                         token_expired=expire_date,
-                                         token_clientId=client_id,
-                                         token_user=user.first())
-                        token.save()
-                        return JsonResponse({'token': token.token_content,
-                                             'expired': token.token_expired,
-                                             'clientId': token.token_clientId})
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+            client_id = body.get('token_clientId')
+            password = body.get('password')
+            username = body.get('username')
+            if client_id and username and password is not None:
+                password_checking = Utilities.RegEx.check_password_matching(password)
+                username_checking = Utilities.RegEx.check_username_matching(username)
+                if username_checking is True:
+                    if password_checking is True:
+                        user = User.objects.filter(Q(username=username) & Q(password=password))
+                        if user.first() is not None:
+                            time_difference = timedelta(minutes=5)
+                            expire_date = timezone.now() + time_difference
+                            my_token = str(salted_hmac(datetime.now(), user.first()).hexdigest())
+                            token = ApiToken(token_content=my_token,
+                                             token_expired=expire_date,
+                                             token_clientId=client_id,
+                                             token_user=user.first())
+                            token.save()
+                            return JsonResponse({'token': token.token_content,
+                                                 'expired': token.token_expired,
+                                                 'clientId': token.token_clientId}, status=200)
+                        else:
+                            return JsonResponse({'result': 'this user is not available'}, status=404)
                     else:
-                        return JsonResponse({'Error': 'this user is not available'})
+                        return JsonResponse({'result', password_checking['Err']}, status=400)
                 else:
-                    user_form.add_error('password', password_checking['Err'])
+                    return JsonResponse({'result', username_checking['Err']}, status=400)
             else:
-                user_form.add_error('username', username_checking['Err'])
+                return JsonResponse({'result': 'Enter required fields '
+                                     '(username, password, token_clientId)'}, status=400)
         else:
-            user_form = UserForm()
-            token_form = TokenForm()
-        return shortcuts.render(request, UserActivity._template_login, {
-            'user_form': user_form,
-            'token_form': token_form
-        })
+            return JsonResponse({'result': 'You can\'t send this type of request'}, status=403)
 
 
 class Utilities:

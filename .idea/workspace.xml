@@ -7,6 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,49 +41,83 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="190" column="48" selection-start-line="190" selection-start-column="48" selection-end-line="190" selection-end-column="48" />
+            <state relative-caret-position="323">
+              <caret line="322" column="76" selection-start-line="322" selection-start-column="76" selection-end-line="322" selection-end-column="76" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1290#3918#0" />
-                <element signature="e#1419#2540#0" />
-                <element signature="e#1565#2424#0" />
-                <element signature="e#1701#2261#0" />
-                <element signature="e#1708#2175#0" />
-                <element signature="e#2304#2412#0" />
-                <element signature="e#2459#2552#0" />
-                <element signature="e#2567#3918#0" />
-                <element signature="e#2736#2936#0" />
-                <element signature="e#2761#2836#0" />
-                <element signature="e#2971#3015#0" />
-                <element signature="e#3112#3776#0" />
-                <element signature="e#3351#3703#0" />
-                <element signature="e#3811#3918#0" />
-                <element signature="e#3961#5874#0" />
-                <element signature="e#4414#5731#0" />
-                <element signature="e#4477#5606#0" />
-                <element signature="e#4596#5469#0" />
-                <element signature="e#5083#5423#0" />
-                <element signature="e#5512#5606#0" />
-                <element signature="e#5641#5731#0" />
-                <element signature="e#5758#5874#0" />
-                <element signature="e#5906#7546#0" />
-                <element signature="e#5975#7438#0" />
-                <element signature="e#6063#7317#0" />
-                <element signature="e#6193#6288#0" />
-                <element signature="e#6376#6475#0" />
-                <element signature="e#6564#6956#0" />
-                <element signature="e#6999#7091#0" />
-                <element signature="e#7116#7275#0" />
-                <element signature="e#7465#7546#0" />
-                <element signature="e#7738#7977#0" />
-                <element signature="e#7812#7935#0" />
-                <element signature="e#8252#9468#0" />
-                <element signature="e#10189#14079#0" />
-                <element signature="e#10308#12065#0" />
-                <element signature="e#12100#14079#0" />
-                <element signature="e#14104#15255#0" />
+                <element signature="e#700#1239#0" />
+                <element signature="e#1362#4062#0" />
+                <element signature="e#1491#2648#0" />
+                <element signature="e#1637#2508#0" />
+                <element signature="e#1773#2345#0" />
+                <element signature="e#1780#2247#0" />
+                <element signature="e#2388#2508#0" />
+                <element signature="e#2543#2648#0" />
+                <element signature="e#2675#4062#0" />
+                <element signature="e#2844#3056#0" />
+                <element signature="e#2869#2944#0" />
+                <element signature="e#3091#3135#0" />
+                <element signature="e#3232#3908#0" />
+                <element signature="e#3470#3844#0" />
+                <element signature="e#3471#3823#0" />
+                <element signature="e#3943#4062#0" />
+                <element signature="e#4574#5932#0" />
+                <element signature="e#4637#5790#0" />
+                <element signature="e#4756#5641#0" />
+                <element signature="e#5243#5583#0" />
+                <element signature="e#5684#5790#0" />
+                <element signature="e#5825#5932#0" />
+                <element signature="e#5959#6087#0" />
+                <element signature="e#6119#7913#0" />
+                <element signature="e#6400#7799#0" />
+                <element signature="e#6488#7666#0" />
+                <element signature="e#6594#6665#0" />
+                <element signature="e#6726#6801#0" />
+                <element signature="e#6863#7242#0" />
+                <element signature="e#6990#7084#0" />
+                <element signature="e#7135#7242#0" />
+                <element signature="e#7324#7428#0" />
+                <element signature="e#7453#7612#0" />
+                <element signature="e#7701#7799#0" />
+                <element signature="e#7826#7913#0" />
+                <element signature="e#7948#8602#0" />
+                <element signature="e#8017#8488#0" />
+                <element signature="e#8105#8356#0" />
+                <element signature="e#8179#8302#0" />
+                <element signature="e#8391#8488#0" />
+                <element signature="e#8515#8602#0" />
+                <element signature="e#9133#9463#0" />
+                <element signature="e#9721#9804#0" />
+                <element signature="e#9987#10713#0" />
+                <element signature="e#10027#10603#0" />
+                <element signature="e#10237#10514#0" />
+                <element signature="e#10304#10450#0" />
+                <element signature="e#10305#10423#0" />
+                <element signature="e#10901#12786#0" />
+                <element signature="e#11300#12657#0" />
+                <element signature="e#11597#11729#1" />
+                <element signature="e#15317#15807#0" />
+                <element signature="e#15597#15807#0" />
+                <element signature="e#15604#15779#0" />
+                <element signature="e#15612#15778#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/base.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="10275">
+              <caret line="717" selection-start-line="717" selection-end-line="717" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/manager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2790">
+              <caret line="191" selection-start-line="191" selection-end-line="191" />
             </state>
           </provider>
         </entry>
@@ -97,33 +132,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rest/models.py">
+        <entry file="file:///usr/lib/python3.6/json/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <element signature="e#113#354#0" />
-                <element signature="e#307#354#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/contrib/staticfiles/handlers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="855">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/lib/python3.6/wsgiref/handlers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2010">
-              <caret line="137" selection-start-line="137" selection-end-line="137" />
+            <state relative-caret-position="5265">
+              <caret line="353" selection-start-line="353" selection-end-line="353" />
             </state>
           </provider>
         </entry>
@@ -140,8 +152,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1245">
-              <caret line="93" selection-start-line="93" selection-end-line="93" />
+            <state relative-caret-position="1725">
+              <caret line="125" selection-start-line="125" selection-end-line="125" />
             </state>
           </provider>
         </entry>
@@ -158,8 +170,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="36" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="285">
+              <caret line="33" selection-start-line="33" selection-end-line="33" />
             </state>
           </provider>
         </entry>
@@ -224,48 +236,16 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="684" />
-    <option name="width" value="682" />
-    <option name="height" value="740" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="width" value="1360" />
+    <option name="height" value="741" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="blog_restapi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="blog_restapi" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="blog_restapi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="blog_restapi" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="blog_restapi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="blog_restapi" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="blog_restapi" type="b2602c69:ProjectViewProjectNode" />
-              <item name="blog_restapi" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
@@ -482,7 +462,16 @@
       <workItem from="1551126182794" duration="1023000" />
       <workItem from="1551164370670" duration="648000" />
       <workItem from="1551168799093" duration="1626000" />
-      <workItem from="1551171455033" duration="1246000" />
+      <workItem from="1551171455033" duration="2127000" />
+      <workItem from="1551173616314" duration="1884000" />
+      <workItem from="1551177018265" duration="1709000" />
+      <workItem from="1551179844900" duration="755000" />
+      <workItem from="1551183506658" duration="1222000" />
+      <workItem from="1551188277512" duration="1167000" />
+      <workItem from="1551190213697" duration="1463000" />
+      <workItem from="1551192346487" duration="1788000" />
+      <workItem from="1551194286388" duration="2071000" />
+      <workItem from="1551196858661" duration="3607000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -729,11 +718,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551172662632</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="'delete' responses status set">
+      <created>1551172712422</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1551172712422</updated>
+    </task>
+    <task id="LOCAL-00037" summary="'category' endpoint responses status set">
+      <created>1551173006232</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1551173006232</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="255885000" />
+    <option name="totallyTimeSpent" value="272432000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -745,16 +748,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1366" height="741" extended-state="6" />
+    <frame x="0" y="0" width="1360" height="741" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17424242" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.36792454" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3273906" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49772727" weight="0.3241491" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.73636365" visible="true" weight="0.16531605" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.73636365" visible="true" weight="0.1280389" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6606061" weight="0.38249594" />
@@ -762,7 +765,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32901135" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25757575" side_tool="true" weight="0.43435982" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.74242425" weight="0.3419773" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.74242425" weight="0.34683955" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49772727" weight="0.3273906" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -801,8 +804,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/blog_restapi" />
     </ignored-roots>
-    <MESSAGE value="clientIds change to user" />
-    <MESSAGE value="token expiration datetime has changed to timezone" />
     <MESSAGE value="responses for api requests now are more clarified" />
     <MESSAGE value="debug register validation" />
     <MESSAGE value="RegEx conditions now is more sensitive" />
@@ -826,23 +827,11 @@
     <MESSAGE value="'get' status responses set" />
     <MESSAGE value="'put' responses status set" />
     <MESSAGE value="'post' responses status set" />
-    <option name="LAST_COMMIT_MESSAGE" value="'post' responses status set" />
+    <MESSAGE value="'delete' responses status set" />
+    <MESSAGE value="'category' endpoint responses status set" />
+    <option name="LAST_COMMIT_MESSAGE" value="'category' endpoint responses status set" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/contrib/gis/db/backends/base/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/core/management/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6225">
-          <caret line="424" selection-start-line="424" selection-end-line="424" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/urls/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
@@ -1031,13 +1020,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10275">
-          <caret line="717" selection-start-line="717" selection-end-line="717" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/fields/related_descriptors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2805">
@@ -1125,68 +1107,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rest/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="190" column="48" selection-start-line="190" selection-start-column="48" selection-end-line="190" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1290#3918#0" />
-            <element signature="e#1419#2540#0" />
-            <element signature="e#1565#2424#0" />
-            <element signature="e#1701#2261#0" />
-            <element signature="e#1708#2175#0" />
-            <element signature="e#2304#2412#0" />
-            <element signature="e#2459#2552#0" />
-            <element signature="e#2567#3918#0" />
-            <element signature="e#2736#2936#0" />
-            <element signature="e#2761#2836#0" />
-            <element signature="e#2971#3015#0" />
-            <element signature="e#3112#3776#0" />
-            <element signature="e#3351#3703#0" />
-            <element signature="e#3811#3918#0" />
-            <element signature="e#3961#5874#0" />
-            <element signature="e#4414#5731#0" />
-            <element signature="e#4477#5606#0" />
-            <element signature="e#4596#5469#0" />
-            <element signature="e#5083#5423#0" />
-            <element signature="e#5512#5606#0" />
-            <element signature="e#5641#5731#0" />
-            <element signature="e#5758#5874#0" />
-            <element signature="e#5906#7546#0" />
-            <element signature="e#5975#7438#0" />
-            <element signature="e#6063#7317#0" />
-            <element signature="e#6193#6288#0" />
-            <element signature="e#6376#6475#0" />
-            <element signature="e#6564#6956#0" />
-            <element signature="e#6999#7091#0" />
-            <element signature="e#7116#7275#0" />
-            <element signature="e#7465#7546#0" />
-            <element signature="e#7738#7977#0" />
-            <element signature="e#7812#7935#0" />
-            <element signature="e#8252#9468#0" />
-            <element signature="e#10189#14079#0" />
-            <element signature="e#10308#12065#0" />
-            <element signature="e#12100#14079#0" />
-            <element signature="e#14104#15255#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/views/decorators/csrf.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rest/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="45">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#113#354#0" />
             <element signature="e#307#354#0" />
           </folding>
         </state>
@@ -1206,6 +1132,98 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rest/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="322" column="76" selection-start-line="322" selection-start-column="76" selection-end-line="322" selection-end-column="76" />
+          <folding>
+            <element signature="e#700#1239#0" />
+            <element signature="e#1362#4062#0" />
+            <element signature="e#1491#2648#0" />
+            <element signature="e#1637#2508#0" />
+            <element signature="e#1773#2345#0" />
+            <element signature="e#1780#2247#0" />
+            <element signature="e#2388#2508#0" />
+            <element signature="e#2543#2648#0" />
+            <element signature="e#2675#4062#0" />
+            <element signature="e#2844#3056#0" />
+            <element signature="e#2869#2944#0" />
+            <element signature="e#3091#3135#0" />
+            <element signature="e#3232#3908#0" />
+            <element signature="e#3470#3844#0" />
+            <element signature="e#3471#3823#0" />
+            <element signature="e#3943#4062#0" />
+            <element signature="e#4574#5932#0" />
+            <element signature="e#4637#5790#0" />
+            <element signature="e#4756#5641#0" />
+            <element signature="e#5243#5583#0" />
+            <element signature="e#5684#5790#0" />
+            <element signature="e#5825#5932#0" />
+            <element signature="e#5959#6087#0" />
+            <element signature="e#6119#7913#0" />
+            <element signature="e#6400#7799#0" />
+            <element signature="e#6488#7666#0" />
+            <element signature="e#6594#6665#0" />
+            <element signature="e#6726#6801#0" />
+            <element signature="e#6863#7242#0" />
+            <element signature="e#6990#7084#0" />
+            <element signature="e#7135#7242#0" />
+            <element signature="e#7324#7428#0" />
+            <element signature="e#7453#7612#0" />
+            <element signature="e#7701#7799#0" />
+            <element signature="e#7826#7913#0" />
+            <element signature="e#7948#8602#0" />
+            <element signature="e#8017#8488#0" />
+            <element signature="e#8105#8356#0" />
+            <element signature="e#8179#8302#0" />
+            <element signature="e#8391#8488#0" />
+            <element signature="e#8515#8602#0" />
+            <element signature="e#9133#9463#0" />
+            <element signature="e#9721#9804#0" />
+            <element signature="e#9987#10713#0" />
+            <element signature="e#10027#10603#0" />
+            <element signature="e#10237#10514#0" />
+            <element signature="e#10304#10450#0" />
+            <element signature="e#10305#10423#0" />
+            <element signature="e#10901#12786#0" />
+            <element signature="e#11300#12657#0" />
+            <element signature="e#11597#11729#1" />
+            <element signature="e#15317#15807#0" />
+            <element signature="e#15597#15807#0" />
+            <element signature="e#15604#15779#0" />
+            <element signature="e#15612#15778#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10275">
+          <caret line="717" selection-start-line="717" selection-end-line="717" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2790">
+          <caret line="191" selection-start-line="191" selection-end-line="191" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/views/decorators/csrf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="750">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.6/json/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5265">
+          <caret line="353" selection-start-line="353" selection-end-line="353" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/servers/basehttp.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2415">
@@ -1215,8 +1233,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1245">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
+        <state relative-caret-position="1725">
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>
@@ -1229,8 +1247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="285">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
