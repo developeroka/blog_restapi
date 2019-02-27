@@ -1,0 +1,300 @@
+swagger: '2.0'
+info:
+  description: >-
+   just a simple api for posts of a blog
+  version: '0.1'
+  title: Swagger BlogPosts
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: '127.0.0.1:8000'
+schemes:
+- "http"
+basePath: /rest
+tags:
+  - name: post
+    description: you can CRUD the posts
+ 
+  - name: category
+    description: Access to catgeories 
+paths:
+  /register:
+    post:
+      tags:
+        - user
+      summary: signup 
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: post attributes 
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SignupUser'
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: wrong category id
+        '403':
+          description: forbidden 
+        '400':
+          description: bad request 
+  /login:
+    post:
+      tags:
+        - user
+      summary: signup 
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: post attributes 
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/SigninUser'
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: wrong category id
+        '403':
+          description: forbidden 
+        '400':
+          description: bad request (insert title, content, author and category id of the post)
+  /api:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - post
+      summary: Recieve list of first 4th posts 
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: token expired  
+        '401':
+          description: authentication failed 
+        '404':
+          description: authentication failed
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - post
+      summary: create new post 
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: post attributes 
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/CreatePost'
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: wrong category id
+        '403':
+          description: forbidden 
+        '400':
+          description: bad request (insert title, content, author and category id of the post)
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - post
+      summary: modify wanted post
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: post attributes to modify
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EditPost'
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: null modified field 
+        '404':
+          description: Invalid Post 
+        '304':
+          description: Invalid category
+        '504':
+          description: Invalid Post Id
+  /api/getpostbyid:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - post
+      summary: Receive wanted post
+      produces:
+        - application/json
+      parameters:
+        - name: post_id
+          in: query
+          description: Id of post to return
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: Invalid Post 
+        '403':
+          description: Permission denied
+        '504':
+          description: Invalid Post Id
+  /api/deletepostbyid:
+    delete:
+      security:
+        - Bearer: []
+      tags: 
+        - post
+      summary: Delete wanted post
+      produces:
+        - application/json
+      parameters:
+        - name: post_id
+          in: query
+          description: Id of post to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+        '404':
+          description: not valid post
+        '400':
+          description: insert post id
+  /api/getpostsbylength:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - post
+      summary: Receive posts in wanted range
+      produces:
+        - application/json
+      parameters:
+        - name: first_item
+          in: query
+          description: first wanted item of posts
+          required: true
+          type: integer
+          format: int64
+        - name: last_item
+          in: query
+          description: last wanted item of posts
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '400':
+          description: parameters wrong type
+        '416':
+          description: requestedRangeNotSatisfiable
+  /api/category:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - category
+      summary: Recieve list of all categories
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Category'
+        '404':
+          description: Invalid Token 
+        '400':
+          description: Expired Token
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  SignupUser:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+  SigninUser:
+    type: object
+    properties:
+      username:
+        type: string
+      password:
+        type: string
+      token_clientId:
+        type: string
+  Category:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      category_title:
+        type: string
+  CreatePost:
+    type: object
+    required:
+      - post_category
+      - post_title
+      - post_content
+    properties:
+      post_category:
+        type: integer
+      post_title:
+        type: string
+      post_content:
+        type: string
+      post_privacy:
+        type: string
+  EditPost:
+    type: object
+    required:
+      - post_category
+      - post_title
+      - post_content
+    properties:
+      post_id:
+        type: integer
+      post_category:
+        type: integer
+      post_title:
+        type: string
+      post_content:
+        type: string
+      post_privacy:
+        type: string
+ 
