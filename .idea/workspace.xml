@@ -5,10 +5,8 @@
     <bookmark url="file://$PROJECT_DIR$/rest/views.py" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="">
+    <list default="true" id="869e332b-0d73-4d65-bf9d-c24f64491d38" name="Default Changelist" comment="remove unused modules">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/rest/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,38 +40,30 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+            <state relative-caret-position="90">
+              <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
               <folding>
-                <element signature="e#506#1374#0" />
-                <element signature="e#1363#3565#0" />
-                <element signature="e#2213#2776#0" />
-                <element signature="e#3253#3359#0" />
-                <element signature="e#3624#5561#0" />
-                <element signature="e#3955#5384#0" />
-                <element signature="e#3858#3941#0" />
-                <element signature="e#4300#4928#0" />
-                <element signature="e#10025#11202#0" />
-                <element signature="e#8179#8302#0" />
-                <element signature="e#8391#8488#0" />
-                <element signature="e#8515#8602#0" />
-                <element signature="e#9987#10713#0" />
-                <element signature="e#10027#10603#0" />
-                <element signature="e#10237#10514#0" />
-                <element signature="e#10304#10450#0" />
-                <element signature="e#10305#10423#0" />
-                <element signature="e#12100#13328#0" />
-                <element signature="e#12530#12860#0" />
-                <element signature="e#13118#13201#0" />
-                <element signature="e#8793#9508#0" />
-                <element signature="e#9555#11617#0" />
-                <element signature="e#11653#13518#0" />
-                <element signature="e#10885#12946#0" />
-                <element signature="e#11317#12723#0" />
-                <element signature="e#12990#15211#0" />
-                <element signature="e#15236#16387#0" />
-                <element signature="e#15309#15836#0" />
-                <element signature="e#15897#16387#0" />
+                <element signature="e#469#7515#0" />
+                <element signature="e#512#1254#0" />
+                <element signature="e#711#1173#0" />
+                <element signature="e#1314#3447#0" />
+                <element signature="e#1513#3378#0" />
+                <element signature="e#1618#3224#0" />
+                <element signature="e#1941#2911#0" />
+                <element signature="e#2095#2610#0" />
+                <element signature="e#3512#5454#0" />
+                <element signature="e#5517#6728#0" />
+                <element signature="e#6784#7515#0" />
+                <element signature="e#7543#13397#0" />
+                <element signature="e#13425#18220#0" />
+                <element signature="e#13560#15948#0" />
+                <element signature="e#13601#15837#0" />
+                <element signature="e#15999#18220#0" />
+                <element signature="e#16040#18110#0" />
+                <element signature="e#18245#19396#0" />
+                <element signature="e#18267#19396#0" />
+                <element signature="e#18318#18845#0" />
+                <element signature="e#18906#19396#0" />
               </folding>
             </state>
           </provider>
@@ -82,7 +72,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rest/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
+            <state relative-caret-position="150">
               <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -130,7 +120,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
+            <state relative-caret-position="1770">
               <caret line="128" selection-start-line="128" selection-end-line="128" />
             </state>
           </provider>
@@ -148,7 +138,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="89">
+            <state relative-caret-position="300">
               <caret line="34" selection-start-line="34" selection-end-line="34" />
             </state>
           </provider>
@@ -209,8 +199,8 @@
         <option value="$PROJECT_DIR$/rest/templates/rest/login.html" />
         <option value="$PROJECT_DIR$/rest/models.py" />
         <option value="$PROJECT_DIR$/rest/templates/rest/register.html" />
-        <option value="$PROJECT_DIR$/rest/views.py" />
         <option value="$PROJECT_DIR$/rest/urls.py" />
+        <option value="$PROJECT_DIR$/rest/views.py" />
       </list>
     </option>
   </component>
@@ -450,7 +440,8 @@
       <workItem from="1551192346487" duration="1788000" />
       <workItem from="1551194286388" duration="2071000" />
       <workItem from="1551196858661" duration="3995000" />
-      <workItem from="1551243309346" duration="9597000" />
+      <workItem from="1551243309346" duration="9731000" />
+      <workItem from="1551263225316" duration="1517000" />
     </task>
     <task id="LOCAL-00001" summary="password validation has been done">
       <created>1550184607017</created>
@@ -718,11 +709,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551200924526</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="change type of input parameters in get posts requests">
+      <created>1551259922663</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1551259922663</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="282417000" />
+    <option name="totallyTimeSpent" value="284068000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -747,7 +745,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.6606061" weight="0.38249594" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32901135" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.048622366" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.25757575" side_tool="true" weight="0.43435982" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.74242425" weight="0.34683955" />
@@ -789,7 +787,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/blog_restapi" />
     </ignored-roots>
-    <MESSAGE value="debug register validation" />
     <MESSAGE value="RegEx conditions now is more sensitive" />
     <MESSAGE value="add a utility class for RegExes" />
     <MESSAGE value="debug username checking in registration" />
@@ -814,7 +811,8 @@
     <MESSAGE value="'delete' responses status set" />
     <MESSAGE value="'category' endpoint responses status set" />
     <MESSAGE value="login and register endpoints added" />
-    <option name="LAST_COMMIT_MESSAGE" value="login and register endpoints added" />
+    <MESSAGE value="change type of input parameters in get posts requests" />
+    <option name="LAST_COMMIT_MESSAGE" value="change type of input parameters in get posts requests" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/env/lib/python3.6/site-packages/django/urls/__init__.py">
@@ -1114,6 +1112,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rest/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="50" selection-start-line="6" selection-start-column="50" selection-end-line="6" selection-end-column="50" />
+          <folding>
+            <element signature="e#469#7515#0" />
+            <element signature="e#512#1254#0" />
+            <element signature="e#711#1173#0" />
+            <element signature="e#1314#3447#0" />
+            <element signature="e#1513#3378#0" />
+            <element signature="e#1618#3224#0" />
+            <element signature="e#1941#2911#0" />
+            <element signature="e#2095#2610#0" />
+            <element signature="e#3512#5454#0" />
+            <element signature="e#5517#6728#0" />
+            <element signature="e#6784#7515#0" />
+            <element signature="e#7543#13397#0" />
+            <element signature="e#13425#18220#0" />
+            <element signature="e#13560#15948#0" />
+            <element signature="e#13601#15837#0" />
+            <element signature="e#15999#18220#0" />
+            <element signature="e#16040#18110#0" />
+            <element signature="e#18245#19396#0" />
+            <element signature="e#18267#19396#0" />
+            <element signature="e#18318#18845#0" />
+            <element signature="e#18906#19396#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/db/models/manager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2790">
@@ -1142,6 +1180,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1770">
+          <caret line="128" selection-start-line="128" selection-end-line="128" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2115">
@@ -1149,72 +1194,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/utils/deprecation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="93" selection-start-line="93" selection-end-line="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/exception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
+        <state relative-caret-position="300">
           <caret line="34" selection-start-line="34" selection-end-line="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/core/handlers/base.py">
+    <entry file="file://$PROJECT_DIR$/../testapi/env/lib/python3.6/site-packages/django/utils/deprecation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="128" selection-start-line="128" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="29" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-          <folding>
-            <element signature="e#506#1374#0" />
-            <element signature="e#1363#3565#0" />
-            <element signature="e#2213#2776#0" />
-            <element signature="e#3253#3359#0" />
-            <element signature="e#3624#5561#0" />
-            <element signature="e#3955#5384#0" />
-            <element signature="e#3858#3941#0" />
-            <element signature="e#4300#4928#0" />
-            <element signature="e#10025#11202#0" />
-            <element signature="e#8179#8302#0" />
-            <element signature="e#8391#8488#0" />
-            <element signature="e#8515#8602#0" />
-            <element signature="e#9987#10713#0" />
-            <element signature="e#10027#10603#0" />
-            <element signature="e#10237#10514#0" />
-            <element signature="e#10304#10450#0" />
-            <element signature="e#10305#10423#0" />
-            <element signature="e#12100#13328#0" />
-            <element signature="e#12530#12860#0" />
-            <element signature="e#13118#13201#0" />
-            <element signature="e#8793#9508#0" />
-            <element signature="e#9555#11617#0" />
-            <element signature="e#11653#13518#0" />
-            <element signature="e#10885#12946#0" />
-            <element signature="e#11317#12723#0" />
-            <element signature="e#12990#15211#0" />
-            <element signature="e#15236#16387#0" />
-            <element signature="e#15309#15836#0" />
-            <element signature="e#15897#16387#0" />
-          </folding>
+        <state relative-caret-position="1380">
+          <caret line="93" selection-start-line="93" selection-end-line="93" />
         </state>
       </provider>
     </entry>

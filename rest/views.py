@@ -5,8 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 from rest.models import BlogPost, PostCategory, ApiToken
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import salted_hmac
-from rest.forms import UserForm, TokenForm
-from django import shortcuts
 from datetime import datetime, timedelta
 from django.utils import timezone
 import re
@@ -410,6 +408,8 @@ class Utilities:
                                'A-Z, a-z, 0-9 and /@/./_/+/-/'
                                'and it must be at least 3 characters'}
                 return data
+
+
 
 
 
