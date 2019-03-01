@@ -9,4 +9,4 @@ this project contains Codes of Api and Api document which is so good to check as
 
 by the way you can contribute in this project to make it better and more usefull
 
-Take Care... : )
+Take Care :)
